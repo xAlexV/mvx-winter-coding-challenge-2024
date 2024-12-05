@@ -30,7 +30,7 @@ pip install requests
 -AMOUNT_EGLD = 0.0055
 - run
 ```shell
-python generate_and_faucet.py
+python generate_wallet_and_transfer_token.py
 ```
 - 9 wallets should be generated in output folder
 - transactions hashes can be viewed in the terminal

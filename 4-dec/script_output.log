@@ -1,0 +1,295 @@
+Fetching wallets from ../3-dec/output...
+Issuing tokens for each wallet...
+
+Wallet: erd1kgarc3ppdn6y0llrkwly3jjg60qcsqaqm0ka0kmxey9txsp7y8aqj6muc4
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/7131a378f6d81e60a0d23191925c0f7b8e98cd35c9a2cba6892df8e9ab34e453)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/2de05734f6fbe9ef0049380c12ef46e510e212da7879b8e0f4d3d9dc112f3a04)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/2d75346fe2488e880b1c98ff5676cf5db8a7c593b2eb4b3af27f7224e869cb10)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+
+Wallet: erd1ndlycc04p3s0m0susmqj0q6ex2c2f8f9jpgvret5ymdclsaxup6qzxue4e
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/0e925e6e7311a3c1a55be468405bd9a107b79e6a78ca4c41ac5a5d577c20d890)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/b88817bf826065eaa7e3af9a9b5ff2992ed0a9788787752e573ee6b9f03824d9)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/50f1f5a552f1c12cd49c4d9defa7c2908b7b0f9249ae2a76fd59c8cc1f41f3fc)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+
+Wallet: erd1w6d4rcfz2shzhnut372c6tvlf83p3cf0dsld9p900ftkggxsfess6nuk50
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/d392c7f67506e8fcee6b2974dc3839f57b28725d953b24c3fbf4b5eaf82f1c57)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/eef4c995473c8a22834b83be466ced0fc8178b2c9ce911ce452de34310f7f2b9)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/2effa26e9dd63d3ce1aa44868ca714ab84c1acfb865070840f909320d62f7cac)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+
+Wallet: erd1u8ux9htkjrdykx7evmqw94xt9mset0t9jly2pr6y3ty2k8yjn48qk2q7mp
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/8874c861717ac85dae26af58d90bec3d3f4179e450e77b3d6b34fc7669dad12e)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/e42a27932da5997a98e0792240e918fc06f0816be56f91ed6f47a66f3046500e)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/a167718519509a63a975d5d4f92c62c59ba8734576dbc34240a2e78b2535991e)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+
+Wallet: erd1j0u5csyxmsd23mcx5rqyzlljc5pkr8uhaqa9ug5az0rsdgtnqxpssqucgm
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/233445196ef747b2d24d4af8e027f72c8078b96c510d6d80f87c60a177858f05)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/5fea5a59ba36a784e7a7e2fa250d0c2982f0fbc1c36ef1060550165fe0aa8359)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/26387127cc4644b3ea416d068371f818c6b19f3a0d0ee1fa6dfcb0a2583e7dcc)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+
+Wallet: erd19q586tm8k5vzjwsmmy7v85e2yc899wqulw5pur0k377ueylckzls0gaflu
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/79f0a7dde3f340d672de4422468aac381b8d5b6179daf87781da9373af2a28e8)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/9731bd398f6435c4a664f78c3f75f47b0b1ac7b2394f5238a7f5f2e1e1ee974f)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/9e18085835bbc5dee8d247e698789c9b8779492611d3bfabf8bf272f706f10a0)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+
+Wallet: erd1fp70w6fyswzjww3nw68hhxa0ewevzkp25xnar56up9z9k67pvakqyja64z
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/f42fb1c4c44583eb2c0aef8c74660d7a2d2a3c0ce54e6a2842471593e8c1d9b1)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/eb3fddbed07cd543bd2fb3fe17d556b00bbcd70dbb15da2471d496d302b8eb18)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/37531a3cb48bbc3c7fe86f0677abc71e5f9a089b3e29224c8c30f816ae8d9e83)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+
+Wallet: erd10jl8el930pu87jcflrwtsvr5qnynrh923wwyapdkevv92n88qeaqqdhdns
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/25eb04709016a357fc3739cfb630dbc10fda4e33f964293f97dbf5c207821c8b)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/aa76ee1bddb9277ad2abf8804dca2465547a0a5d01dc6f18246455437a92bb91)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/2acb4c1976af4f45509c3776db70d04f90445827108970ee399bc7c380384047)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+
+Wallet: erd1hf64gjf24ernlcxzyavrz8lajg6ef9chp3h8u4ytwzv4sz8xkjxq0q9va6
+Payload: issue@57494e5445524d56584348414c4c454e47453234@57494e544552@2386f26fc10000@08
+Issued Token WINTER (Tx: https://devnet-explorer.multiversx.com/transactions/1c686d254af3d4942db5a74d1a8befd9af0396abcf52b778f4d89c74808708e9)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@535052494e474d56584348414c4c454e47453234@535052494e47@2386f26fc10000@08
+Issued Token SPRING (Tx: https://devnet-explorer.multiversx.com/transactions/9bd2fd38baab7a18fcfbab45133c1090db77865035e084af87a4b8a743e54b90)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success
+Payload: issue@53554d4d45524d56584348414c4c454e47453234@53554d4d4552@2386f26fc10000@08
+Issued Token SUMMER (Tx: https://devnet-explorer.multiversx.com/transactions/770e8f703c45ca8cf2b300d31f2963811a7f46b675f8336ddc9eb1bbaab1fbd7)
+Waiting for transaction to complete...
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: pending, Is completed: False
+Status: success, Is completed: True
+Transaction confirmed: success

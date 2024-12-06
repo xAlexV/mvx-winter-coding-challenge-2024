@@ -16,18 +16,14 @@ pip install requests
 # Run the Script
 - add a funding wallet (.json file) to automatically send tokens to generated addresses
 - set following variables:
-
--FUNDING_WALLET_JSON = "./funding_wallet.json"  # Path to the JSON file of the funding wallet
-
--FUNDING_WALLET_PASSWORD = "password"  # Password to decrypt the funding wallet
-
--OUTPUT_DIR = Path("./output")
-
--ADDRESSES_PER_SHARD = 3
-
--SHARDS = [0, 1, 2]
-
--AMOUNT_EGLD = 0.0055
+```
+FUNDING_WALLET_JSON = "./funding_wallet.json"  # Path to the JSON file of the funding wallet
+FUNDING_WALLET_PASSWORD = "password"  # Password to decrypt the funding wallet
+OUTPUT_DIR = Path("./output")
+ADDRESSES_PER_SHARD = 3
+SHARDS = [0, 1, 2]
+AMOUNT_EGLD = 0.0055
+```
 - run
 ```shell
 python generate_wallet_and_transfer_token.py

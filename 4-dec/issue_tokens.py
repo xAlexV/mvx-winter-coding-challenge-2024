@@ -1,9 +1,6 @@
 import time
-import random
-import json
 from pathlib import Path
 from multiversx_sdk import ProxyNetworkProvider, Address, UserSigner, Transaction, TransactionComputer
-from multiversx_sdk.network_providers.transaction_status import TransactionStatus
 
 # Constants
 PROXY_URL = "https://devnet-gateway.multiversx.com"

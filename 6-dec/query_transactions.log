@@ -1,0 +1,32 @@
+2024-12-06 11:56:51,895 - Fetching wallets from the output directory...
+2024-12-06 11:56:51,944 - 
+Wallet: erd1kgarc3ppdn6y0llrkwly3jjg60qcsqaqm0ka0kmxey9txsp7y8aqj6muc4
+2024-12-06 11:56:56,569 - Found 1006 transactions for account: erd1kgarc3ppdn6y0llrkwly3jjg60qcsqaqm0ka0kmxey9txsp7y8aqj6muc4 (API count: 1006)
+2024-12-06 11:56:56,634 - 
+Wallet: erd1ndlycc04p3s0m0susmqj0q6ex2c2f8f9jpgvret5ymdclsaxup6qzxue4e
+2024-12-06 11:57:02,092 - Found 1005 transactions for account: erd1ndlycc04p3s0m0susmqj0q6ex2c2f8f9jpgvret5ymdclsaxup6qzxue4e (API count: 1005)
+2024-12-06 11:57:02,157 - 
+Wallet: erd1w6d4rcfz2shzhnut372c6tvlf83p3cf0dsld9p900ftkggxsfess6nuk50
+2024-12-06 11:57:08,533 - Found 1005 transactions for account: erd1w6d4rcfz2shzhnut372c6tvlf83p3cf0dsld9p900ftkggxsfess6nuk50 (API count: 1005)
+2024-12-06 11:57:08,608 - 
+Wallet: erd1u8ux9htkjrdykx7evmqw94xt9mset0t9jly2pr6y3ty2k8yjn48qk2q7mp
+2024-12-06 11:57:13,698 - Found 1005 transactions for account: erd1u8ux9htkjrdykx7evmqw94xt9mset0t9jly2pr6y3ty2k8yjn48qk2q7mp (API count: 1005)
+2024-12-06 11:57:13,771 - 
+Wallet: erd1j0u5csyxmsd23mcx5rqyzlljc5pkr8uhaqa9ug5az0rsdgtnqxpssqucgm
+2024-12-06 11:57:18,556 - Found 1005 transactions for account: erd1j0u5csyxmsd23mcx5rqyzlljc5pkr8uhaqa9ug5az0rsdgtnqxpssqucgm (API count: 1005)
+2024-12-06 11:57:18,616 - 
+Wallet: erd19q586tm8k5vzjwsmmy7v85e2yc899wqulw5pur0k377ueylckzls0gaflu
+2024-12-06 11:57:23,195 - Found 1005 transactions for account: erd19q586tm8k5vzjwsmmy7v85e2yc899wqulw5pur0k377ueylckzls0gaflu (API count: 1005)
+2024-12-06 11:57:23,254 - 
+Wallet: erd1fp70w6fyswzjww3nw68hhxa0ewevzkp25xnar56up9z9k67pvakqyja64z
+2024-12-06 11:57:27,967 - Found 1005 transactions for account: erd1fp70w6fyswzjww3nw68hhxa0ewevzkp25xnar56up9z9k67pvakqyja64z (API count: 1005)
+2024-12-06 11:57:28,026 - 
+Wallet: erd10jl8el930pu87jcflrwtsvr5qnynrh923wwyapdkevv92n88qeaqqdhdns
+2024-12-06 11:57:33,804 - Found 1005 transactions for account: erd10jl8el930pu87jcflrwtsvr5qnynrh923wwyapdkevv92n88qeaqqdhdns (API count: 1005)
+2024-12-06 11:57:33,881 - 
+Wallet: erd1hf64gjf24ernlcxzyavrz8lajg6ef9chp3h8u4ytwzv4sz8xkjxq0q9va6
+2024-12-06 11:57:38,989 - Found 1005 transactions for account: erd1hf64gjf24ernlcxzyavrz8lajg6ef9chp3h8u4ytwzv4sz8xkjxq0q9va6 (API count: 1005)
+2024-12-06 11:57:39,044 - Saving transactions to files...
+2024-12-06 11:57:39,077 - Transactions saved to transactions.csv
+2024-12-06 11:57:39,268 - Transactions saved to transactions.json
+2024-12-06 11:57:39,268 - All transactions processed and saved successfully!

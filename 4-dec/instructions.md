@@ -16,26 +16,18 @@ pip install requests
 # Run the Script
 - make sure that previously created wallets are in folder ../3-dec/output
 - change constants if needed
+
 ```
--PROXY_URL = "https://devnet-gateway.multiversx.com"
-
--OUTPUT_DIR = "../3-dec/output"
-
--TOKEN_GAS_LIMIT = 60000000
-
--ISSUE_COST = 0.05 * 10**18  # 0.05 EGLD in smallest denomination
-
--TOKEN_SUPPLY = 100_000_000 * 10**8  # 100 million tokens with 8 decimals
-
--TOKEN_DECIMALS = 8
-
--TOKENS_PER_ACCOUNT = 3
-
--TOKENS_TIKKER = ["WINTER", "SPRING", "SUMMER"]
-
--BLOCKCHAIN_ID = "D"  # Devnet
-
--ISSUANCE_SC = "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"  # Fixed SC issuance address
+PROXY_URL = "https://devnet-gateway.multiversx.com"
+OUTPUT_DIR = "../3-dec/output"
+TOKEN_GAS_LIMIT = 60000000
+ISSUE_COST = 0.05 * 10**18  # 0.05 EGLD in smallest denomination
+TOKEN_SUPPLY = 100_000_000 * 10**8  # 100 million tokens with 8 decimals
+TOKEN_DECIMALS = 8
+TOKENS_PER_ACCOUNT = 3
+TOKENS_TIKKER = ["WINTER", "SPRING", "SUMMER"]
+BLOCKCHAIN_ID = "D"  # Devnet
+ISSUANCE_SC = "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"  # Fixed SC issuance address
 ```
 - run
 ```shell

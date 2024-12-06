@@ -45,7 +45,7 @@ def fetch_transaction_count(account_address: Address) -> int:
         return 0
 
 
-def fetch_transactions(account_address: Address, page_size=50) -> list:
+def fetch_transactions(account_address: Address, page_size=MAX_TRANSACTIONS) -> list:
     """Retrieve all transactions for an account using pagination."""
     transactions = []
     page = 0

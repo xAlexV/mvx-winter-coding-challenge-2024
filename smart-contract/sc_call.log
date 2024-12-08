@@ -1,0 +1,11 @@
+2024-12-08 18:28:04,462 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 18:28:04,462 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 18:28:04,687 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/d53c37d5259286fe4e36eb3e92345330dcbc2a2937b28acf91ebb59144de6a92)
+2024-12-08 18:28:07,693 - Waiting for transaction to complete...
+2024-12-08 18:28:07,822 - Status: pending, Is completed: False
+2024-12-08 18:28:12,983 - Status: pending, Is completed: False
+2024-12-08 18:28:18,121 - Status: pending, Is completed: False
+2024-12-08 18:28:23,313 - Status: pending, Is completed: False
+2024-12-08 18:28:28,528 - Status: pending, Is completed: False
+2024-12-08 18:28:33,687 - Status: success, Is completed: True
+2024-12-08 18:28:33,688 - Transaction confirmed: success

@@ -1,0 +1,87 @@
+{
+    "name": "issue_token_snow_test",
+    "steps": [
+        {
+            "step": "setState",
+            "accounts": {
+                "address:owner": {
+                    "nonce": "1",
+                    "balance": "1000000000000000000"
+                }
+            },
+            "newAddresses": [
+                {
+                    "creatorAddress": "address:owner",
+                    "creatorNonce": "1",
+                    "newAddress": "sc:issue_token_snow"
+                }
+            ]
+        },
+        {
+            "step": "scDeploy",
+            "id": "deploy",
+            "tx": {
+                "from": "address:owner",
+                "contractCode": "mxsc:../output/issue-token-snow-sc.mxsc.json",
+                "arguments": [],
+                "gasLimit": "5000000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [],
+                "status": "success",
+                "logs": [],
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "issue_token",
+            "tx": {
+                "from": "address:owner",
+                "to": "sc:issue_token_snow",
+                "function": "issue_token_snow",
+                "arguments": [
+                    "SnowToken",
+                    "100000000",
+                    "1", "1", "1", "1",
+                    "1", "1", "1", "1"
+                ],
+                "gasLimit": "6000000",
+                "gasPrice": "0",
+                "value": "50000000000000000"
+            },
+            "expect": {
+                "out": [],
+                "status": "success",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "issue_token_with_random_name",
+            "tx": {
+                "from": "address:owner",
+                "to": "sc:issue_token_snow",
+                "function": "issue_token_snow",
+                "arguments": [
+                    "",
+                    "500000000",
+                    "1", "1", "1", "1",
+                    "1", "1", "1", "1"
+                ],
+                "gasLimit": "6000000",
+                "gasPrice": "0",
+                "value": "50000000000000000"
+            },
+            "expect": {
+                "out": [],
+                "status": "success",
+                "gas": "*",
+                "refund": "*"
+            }
+        }
+    ]
+}

@@ -16,6 +16,14 @@ pub trait IssueTokenSnowSc {
         initial_supply: BigUint,
     );
 
+    /// Event emitted when a token is burned.
+    #[event("token_burned")]
+    fn token_burned_event(
+        &self,
+        #[indexed] token_identifier: TokenIdentifier,
+        amount: BigUint,
+    );
+
     /// Event emitted when a log message is generated.
     #[event("log_message")]
     fn log_message_event(&self, #[indexed] message: ManagedBuffer);
@@ -117,6 +125,28 @@ pub trait IssueTokenSnowSc {
 
         // Emit token issued event
 
+    }
+
+    /// Endpoint to burn tokens.
+    #[endpoint(burn_token)]
+    fn burn_token(
+        &self,
+        token_identifier: TokenIdentifier,
+        amount: BigUint<Self::Api>,
+    ) {
+        self.emit_log_message("Starting token burn process");
+
+        // Ensure amount is positive
+        require!(amount > BigUint::zero(), "Amount to burn must be greater than 0");
+
+        // Call the ESDT system SC to burn the tokens
+        let _: () = self.send()
+            .esdt_system_sc_proxy()
+            .burn(&token_identifier, &amount)
+            .execute_on_dest_context();
+
+        // Emit an event for the burned tokens
+        self.token_burned_event(token_identifier, amount);
     }
 
     /// Returns the fixed number of decimals for tokens.

@@ -63,6 +63,8 @@ def update_smart_contract():
     tx_hash = proxy.send_transaction(upgrade_transaction)
     logging.info(f"Upgrade transaction sent: {tx_hash}")
 
+    time.sleep(2)
+
     # Wait for the transaction to finalize
     try:
         finalized_transaction = Utilities.wait_for_transaction(proxy, tx_hash)

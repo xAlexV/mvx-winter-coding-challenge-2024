@@ -14,3 +14,4 @@ smart-contract/issue-token-snow-sc/output/*
 smart-contract/issue-token-snow-sc/target/.rustc_info.json
 smart-contract/issue-token-snow-sc/target/*
 smart-contract/__pycache__/utilities.cpython-313.pyc
+smart-contract/*.log

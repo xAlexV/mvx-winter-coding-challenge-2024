@@ -7,6 +7,14 @@ pub trait IssueTokenSnowSc {
     #[init]
     fn init(&self) {}
 
+    // Mapping to store issued tokens and their balances
+    #[storage_mapper("issued_tokens")]
+    fn issued_tokens(
+        &self,
+    ) -> MapMapper<
+        (ManagedAddress<Self::Api>, TokenIdentifier<Self::Api>),
+        BigUint<Self::Api>,
+    >;
     /// Event emitted when a token is successfully issued.
     #[event("token_issued")]
     fn token_issued_event(
@@ -96,6 +104,68 @@ pub trait IssueTokenSnowSc {
                 &adjusted_supply,
                 properties,
             )
+            .async_call_and_exit();
+    }
+
+    /// Endpoint to issue a fungible token.
+    #[payable("EGLD")]
+    #[endpoint(issue_token_snow_and_transfer)]
+    fn issue_token_snow_and_transfer(
+        &self,
+        mut token_name: ManagedBuffer,
+        initial_supply: BigUint<Self::Api>,
+        can_freeze: bool,
+        can_wipe: bool,
+        can_pause: bool,
+        can_mint: bool,
+        can_burn: bool,
+        can_change_owner: bool,
+        can_upgrade: bool,
+        can_add_special_roles: bool,
+    ) {
+        self.emit_log_message("Starting token issuance process");
+
+        let payment = self.call_value().egld_value();
+        let issue_cost = BigUint::from(50_000_000_000_000_000u64); // 0.05 EGLD
+        require!(*payment >= issue_cost, "Minimum fee is 0.05 EGLD");
+
+        if token_name.is_empty() {
+            token_name = self.generate_random_token_name();
+        }
+
+        require!(
+            initial_supply > BigUint::zero(),
+            "Initial supply must be greater than 0"
+        );
+
+        let token_ticker = ManagedBuffer::from("SNOW");
+        self.emit_log_message("Token ticker set to SNOW");
+
+        let num_decimals = self.get_decimals();
+        let adjusted_supply = initial_supply.clone() * BigUint::from(10u64).pow(num_decimals as u32);
+
+        let properties = FungibleTokenProperties {
+            num_decimals,
+            can_freeze,
+            can_wipe,
+            can_pause,
+            can_mint,
+            can_burn,
+            can_change_owner,
+            can_upgrade,
+            can_add_special_roles,
+        };
+
+        // Call the ESDT system smart contract to issue the token
+        self.send()
+            .esdt_system_sc_proxy()
+            .issue_fungible(
+                issue_cost,
+                &token_name,
+                &token_ticker,
+                &adjusted_supply,
+                properties,
+            )
             .with_callback(self.callbacks().esdt_issue_callback(
                 self.blockchain().get_caller(),
             ))
@@ -125,8 +195,12 @@ pub trait IssueTokenSnowSc {
                         &returned_tokens,
                     );
         
+                // Update the user's balance in storage
+                self.update_user_balance(caller.clone(), unwrapped_identifier.clone(), returned_tokens.clone());
+                
+                // Track token issuance
                 self.emit_log_message("Tokens transferred to the caller");
-        
+
                 // Emit event for successful issuance
                 self.token_issued_event(
                     unwrapped_identifier, // Use the unwrapped identifier here
@@ -177,6 +251,37 @@ pub trait IssueTokenSnowSc {
         self.token_burned_event(token_identifier, amount);
     }
 
+    /// View endpoint to query token issuance and balances
+    #[view(get_account_tokens)]
+    fn get_account_tokens(
+        &self,
+        user_address: ManagedAddress,
+    ) -> MultiValueEncoded<(TokenIdentifier<Self::Api>, BigUint<Self::Api>)> {
+        let mut result = MultiValueEncoded::new();
+
+        for (key, balance) in self.issued_tokens().iter() {
+            if key.0 == user_address {
+                result.push((key.1.clone(), balance.clone()));
+            }
+        }
+
+        result
+    }
+
+    fn update_user_balance(
+        &self,
+        user_address: ManagedAddress<Self::Api>,
+        token_identifier: TokenIdentifier<Self::Api>,
+        amount: BigUint<Self::Api>,
+    ) {
+        let key = (user_address, token_identifier);
+        if let Some(existing_balance) = self.issued_tokens().get(&key) {
+            self.issued_tokens().insert(key, existing_balance + amount);
+        } else {
+            self.issued_tokens().insert(key, amount);
+        }
+    }
+
     /// Returns the fixed number of decimals for tokens.
     fn get_decimals(&self) -> usize {
         8
@@ -202,33 +307,6 @@ pub trait IssueTokenSnowSc {
         }
 
         name
-    }
-
-    fn biguint_to_string(&self, biguint: &BigUint<Self::Api>) -> ManagedBuffer<Self::Api> {
-        let mut result = ManagedBuffer::new();
-        let mut value = biguint.clone();
-        let ten = BigUint::from(10u32);
-    
-        if value == BigUint::zero() {
-            result.append_bytes(b"0");
-            return result;
-        }
-    
-        // Create a temporary buffer for storing digits
-        let mut temp_buffer: [u8; 64] = [0; 64]; // Assuming BigUint fits within 64 digits
-        let mut index = temp_buffer.len();
-    
-        while value > BigUint::zero() {
-            let digit = (&value % &ten).to_u64().unwrap(); // Extract the last digit
-            index -= 1;
-            temp_buffer[index] = b'0' + digit as u8; // Store ASCII representation in temp buffer
-            value /= &ten; // Divide by 10
-        }
-    
-        // Append the digits from temp_buffer to result
-        result.append_bytes(&temp_buffer[index..]);
-    
-        result
     }
 
     /// Emit a log message event.

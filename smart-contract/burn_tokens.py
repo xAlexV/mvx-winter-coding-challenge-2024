@@ -22,10 +22,11 @@ SC_OWNER_WALLET_PATH = "../3-dec/funding_wallet.json"
 PROXY_URL = "https://devnet-gateway.multiversx.com"
 CHAIN_ID = "D"
 SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqmm40w8anjxdr9mrtcag0a4ydhg4a9ukfq7vqrfujc7"
-TOKEN_TO_BE_BURNED_TICKER = "SNOW-ab6b96"
-AMOUNT_TO_BE_BURNED = 1000
+TOKEN_TO_BE_BURNED_TICKER = "SNOW-9a996e"
+AMOUNT_TO_BE_BURNED = 1000000
 TOKEN_DECIMALS = 8
 TOKEN_GAS_LIMIT = 100_000_000
+TRANSFER_TOKENS_BEFORE_BURN = False
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s", handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler()])
 proxy = ProxyNetworkProvider(PROXY_URL)
@@ -57,7 +58,7 @@ def send_tokens_to_contract(owner_address: Address):
     logging.info(f"Transaction Hash (ESDT Transfer): {tx_hash}")
     time.sleep(2)
 
-     # Step 2: Wait for the transfer to complete
+     # Wait for the transfer to complete
     try:
         finalized_transaction = Utilities.wait_for_transaction(proxy, tx_hash)
         logging.info(f"Token transfer finalized successfully: {finalized_transaction.hash}")
@@ -104,10 +105,11 @@ if __name__ == "__main__":
     owner_address = signer.get_pubkey().to_address(hrp="erd")
     logging.info(f"Address used to burn tokens: [{owner_address.to_bech32()}]")
 
-    # Step 1: Send Tokens to the Smart Contract
-    send_tx_hash = send_tokens_to_contract(owner_address)
-    logging.info(f"Token transfer transaction sent. Hash: {send_tx_hash}")
+    if TRANSFER_TOKENS_BEFORE_BURN is True:
+        # Send Tokens to the Smart Contract
+        send_tx_hash = send_tokens_to_contract(owner_address)
+        logging.info(f"Token transfer transaction sent. Hash: {send_tx_hash}")
 
-    # Step 3: Call the `burn_token` endpoint
+    # Call the `burn_token` endpoint
     burn_tx_hash = burn_tokens(owner_address)
     logging.info(f"Burn transaction sent. Hash: {burn_tx_hash}")

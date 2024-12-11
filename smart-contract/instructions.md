@@ -100,3 +100,24 @@ python update_snow_token_contract.py
 ```
 - output can be viewed in sc_deploy.log
 - contract address should be visibile in the log file. save it as it will be used later.
+
+
+# Burn the tokens
+- we're going to use the script burn_token.py
+- change constants if needed
+```
+SC_OWNER_WALLET_PATH = "../3-dec/funding_wallet.json" # replace with your wallet file
+PROXY_URL = "https://devnet-gateway.multiversx.com" # gateway url
+CHAIN_ID = "D" # chain id
+SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqmm40w8anjxdr9mrtcag0a4ydhg4a9ukfq7vqrfujc7" # Update with the deployed contract address
+TOKEN_TO_BE_BURNED_TICKER = "SNOW-ab6b96" # token ticker for which burn you want to be done
+AMOUNT_TO_BE_BURNED = 1000 # amount to be burned
+TOKEN_DECIMALS = 8 # token decimals
+TOKEN_GAS_LIMIT = 100_000_000 # gas limit
+```
+- run
+```shell
+python burn_token.py
+```
+- output can be viewed in burn_token.log
+- contract address should be visibile in the log file. save it as it will be used later.

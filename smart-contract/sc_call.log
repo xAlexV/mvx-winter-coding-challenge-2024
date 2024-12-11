@@ -9,3 +9,168 @@
 2024-12-08 18:28:28,528 - Status: pending, Is completed: False
 2024-12-08 18:28:33,687 - Status: success, Is completed: True
 2024-12-08 18:28:33,688 - Transaction confirmed: success
+2024-12-08 19:52:18,758 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 19:52:18,799 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 19:52:18,799 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 19:52:19,028 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/1f35df014218556d725548855f168fb05c41c634d1a06d4fdef575147938ada8)
+2024-12-08 19:52:22,033 - Waiting for transaction to complete...
+2024-12-08 19:52:22,155 - Status: fail, Is completed: True
+2024-12-08 19:52:50,031 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 19:52:50,070 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 19:52:50,070 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 19:52:50,330 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/4dc83c92913cd816732c8b984d0be58e507f9f2e0c99072a42fe0517d48363c1)
+2024-12-08 19:52:53,335 - Waiting for transaction to complete...
+2024-12-08 19:52:53,464 - Status: pending, Is completed: False
+2024-12-08 19:52:58,587 - Status: fail, Is completed: True
+2024-12-08 20:00:15,398 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 20:00:15,439 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 20:00:15,439 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 20:00:15,678 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/b1058df0ddf9feb39fade95fe57cccfc488bed81aa75287149fe8da7ff5ea8a8)
+2024-12-08 20:00:18,684 - Waiting for transaction to complete...
+2024-12-08 20:00:18,842 - Status: pending, Is completed: False
+2024-12-08 20:00:23,988 - Status: fail, Is completed: True
+2024-12-08 20:03:27,186 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 20:03:27,226 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 20:03:27,226 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 20:03:27,559 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/4f07965ae8d474a6c806e0ee267bcc19cc8e96e005e1c61eecea99d3af64db60)
+2024-12-08 20:03:30,564 - Waiting for transaction to complete...
+2024-12-08 20:03:30,719 - Status: pending, Is completed: False
+2024-12-08 20:03:35,840 - Status: pending, Is completed: False
+2024-12-08 20:03:41,026 - Status: pending, Is completed: False
+2024-12-08 20:03:46,329 - Status: pending, Is completed: False
+2024-12-08 20:03:51,496 - Status: pending, Is completed: False
+2024-12-08 20:03:56,652 - Status: fail, Is completed: True
+2024-12-08 20:07:52,946 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 20:07:52,986 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 20:07:52,986 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 20:07:53,248 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/739032f727fa1a18fb0c0c957f9ab329eb68a4b55eb6f5d1b452d0f9f491147c)
+2024-12-08 20:07:56,253 - Waiting for transaction to complete...
+2024-12-08 20:07:56,383 - Status: pending, Is completed: False
+2024-12-08 20:08:01,540 - Status: pending, Is completed: False
+2024-12-08 20:08:06,689 - Status: pending, Is completed: False
+2024-12-08 20:08:11,873 - Status: pending, Is completed: False
+2024-12-08 20:08:17,021 - Status: pending, Is completed: False
+2024-12-08 20:08:22,172 - Status: fail, Is completed: True
+2024-12-08 20:14:57,602 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 20:14:57,645 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 20:14:57,645 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 20:14:57,919 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/7f1ea2ab426fb17a2a6267746485541286c59e9bb09102f627ca5a91aad421ca)
+2024-12-08 20:15:00,925 - Waiting for transaction to complete...
+2024-12-08 20:15:01,070 - Status: pending, Is completed: False
+2024-12-08 20:15:06,195 - Status: fail, Is completed: True
+2024-12-08 20:15:24,718 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 20:15:24,757 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 20:15:24,757 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 20:15:24,990 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/0c9a68d38c3edcf5e7f77a32715b81e93aae6cf60d159fca05d713f94833f544)
+2024-12-08 20:15:27,991 - Waiting for transaction to complete...
+2024-12-08 20:15:28,127 - Status: pending, Is completed: False
+2024-12-08 20:15:33,261 - Status: pending, Is completed: False
+2024-12-08 20:15:38,475 - Status: pending, Is completed: False
+2024-12-08 20:15:43,602 - Status: pending, Is completed: False
+2024-12-08 20:15:48,737 - Status: pending, Is completed: False
+2024-12-08 20:15:53,995 - Status: fail, Is completed: True
+2024-12-08 20:16:22,628 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 20:16:22,668 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 20:16:22,668 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 20:16:22,969 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/271d88f90f86b6d0be5ee06b74d75930f63461f9a2e1bfc2b303453c93824af8)
+2024-12-08 20:16:25,975 - Waiting for transaction to complete...
+2024-12-08 20:16:26,099 - Status: pending, Is completed: False
+2024-12-08 20:16:31,282 - Status: pending, Is completed: False
+2024-12-08 20:16:36,413 - Status: pending, Is completed: False
+2024-12-08 20:16:41,648 - Status: pending, Is completed: False
+2024-12-08 20:16:46,784 - Status: pending, Is completed: False
+2024-12-08 20:16:51,929 - Status: fail, Is completed: True
+2024-12-08 20:17:44,488 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-08 20:17:44,526 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-08 20:17:44,526 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-08 20:17:44,766 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/011cf36707a5bc6eaf90f374d985341fd2a45c49f94fe8a5d15689b394744b11)
+2024-12-08 20:17:47,772 - Waiting for transaction to complete...
+2024-12-08 20:17:47,895 - Status: pending, Is completed: False
+2024-12-08 20:17:53,026 - Status: pending, Is completed: False
+2024-12-08 20:17:58,160 - Status: pending, Is completed: False
+2024-12-08 20:18:03,409 - Status: pending, Is completed: False
+2024-12-08 20:18:08,551 - Status: pending, Is completed: False
+2024-12-08 20:18:13,711 - Status: pending, Is completed: False
+2024-12-08 20:18:18,849 - Status: fail, Is completed: True
+2024-12-09 07:05:50,890 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 07:05:50,931 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 07:05:50,931 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 07:05:51,121 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/784f3c605738841789eafcf1511d67b1d1351228e7bab2175b83328042e5508e)
+2024-12-09 07:05:54,126 - Waiting for transaction to complete...
+2024-12-09 07:05:54,240 - Status: pending, Is completed: False
+2024-12-09 07:05:59,352 - Status: fail, Is completed: True
+2024-12-09 07:06:11,052 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 07:06:11,091 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 07:06:11,091 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 07:06:11,269 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/df86ff8313326bfb0345d12385b4e513b6979592f83d67620c87aa4759a2342d)
+2024-12-09 07:06:14,275 - Waiting for transaction to complete...
+2024-12-09 07:06:14,393 - Status: fail, Is completed: True
+2024-12-09 07:09:53,947 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 07:09:53,989 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 07:09:53,989 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 07:09:54,172 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/95fe4e021c551c48cc4ba361b3391c6f8079fe97397b6d6c17b500a334bb78eb)
+2024-12-09 07:09:57,173 - Waiting for transaction to complete...
+2024-12-09 07:09:57,287 - Status: fail, Is completed: True
+2024-12-09 10:59:13,439 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 10:59:13,479 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 10:59:13,479 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 10:59:13,884 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/15dbeab4159bec602dab203c6106170f433c3b2c71948ba229db97724eefee7b)
+2024-12-09 10:59:16,893 - Waiting for transaction to complete...
+2024-12-09 10:59:17,101 - Status: pending, Is completed: False
+2024-12-09 10:59:22,321 - Status: pending, Is completed: False
+2024-12-09 10:59:27,562 - Status: pending, Is completed: False
+2024-12-09 10:59:32,987 - Status: pending, Is completed: False
+2024-12-09 10:59:38,200 - Status: pending, Is completed: False
+2024-12-09 10:59:43,389 - Status: pending, Is completed: False
+2024-12-09 10:59:48,644 - Status: fail, Is completed: True
+2024-12-09 11:28:52,297 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 11:28:52,346 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 11:28:52,346 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 11:28:52,794 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/71ad22a55aac7f77d2d6e15358148bf450ebab96b120ed784da4a62601c09e17)
+2024-12-09 11:28:55,799 - Waiting for transaction to complete...
+2024-12-09 11:28:55,969 - Status: pending, Is completed: False
+2024-12-09 11:29:01,211 - Status: pending, Is completed: False
+2024-12-09 11:29:06,421 - Status: pending, Is completed: False
+2024-12-09 11:29:11,682 - Status: pending, Is completed: False
+2024-12-09 11:29:16,919 - Status: pending, Is completed: False
+2024-12-09 11:29:22,235 - Status: fail, Is completed: True
+2024-12-09 11:44:58,790 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 11:44:58,834 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 11:44:58,834 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 11:44:59,276 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/3b5639f62f9b81ad7229707c395f84df6ef8b16e1d956b95e2646d03fc39e2fb)
+2024-12-09 11:45:02,281 - Waiting for transaction to complete...
+2024-12-09 11:45:02,593 - Status: pending, Is completed: False
+2024-12-09 11:45:07,903 - Status: pending, Is completed: False
+2024-12-09 11:45:13,209 - Status: pending, Is completed: False
+2024-12-09 11:45:18,581 - Status: pending, Is completed: False
+2024-12-09 11:45:23,864 - Status: pending, Is completed: False
+2024-12-09 11:45:29,160 - Status: fail, Is completed: True
+2024-12-09 11:50:35,097 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 11:50:35,137 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 11:50:35,137 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 11:50:35,505 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/95bc43118de273f9836cf6c7b2629c89830721a172d83a3803d8e6f0d40d854c)
+2024-12-09 11:50:38,511 - Waiting for transaction to complete...
+2024-12-09 11:50:38,791 - Status: fail, Is completed: True
+2024-12-09 13:24:27,243 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 13:24:27,292 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 13:24:27,292 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 13:24:27,689 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/a8bb721ece7e6351bca00f8323e73feb5a50fb040462b65a7de4cc5cdecbe6af)
+2024-12-09 13:24:30,690 - Waiting for transaction to complete...
+2024-12-09 13:24:30,949 - Status: pending, Is completed: False
+2024-12-09 13:24:36,217 - Status: pending, Is completed: False
+2024-12-09 13:24:41,494 - Status: pending, Is completed: False
+2024-12-09 13:24:46,793 - Status: pending, Is completed: False
+2024-12-09 13:24:52,029 - Status: pending, Is completed: False
+2024-12-09 13:24:57,376 - Status: fail, Is completed: True
+2024-12-09 14:02:46,159 - We recommend providing the `client_name` when instantiating a NetworkProvider (e.g. ProxyNetworkProvider, ApiNetworkProvider). This information will be used for metrics collection and improving our services.
+2024-12-09 14:02:46,200 - Address used to call the smart contract: [erd1jvch655u7egt93vqj54ea2mxp4fsqr6v5gwftwg8qd06dwllq7vq2mkggc]
+2024-12-09 14:02:46,201 - Payload: issue_token_snow@53616e7461436c617573@3b9aca00@01@01@01@01@01@01@01@01
+2024-12-09 14:02:46,802 - Issued Token (Tx: https://devnet-explorer.multiversx.com/transactions/714ba3c857221ec2cb16d78ba339a56355a6d0f4dfe92f6321013482b7bda3fc)
+2024-12-09 14:02:49,804 - Waiting for transaction to complete...
+2024-12-09 14:02:50,004 - Status: pending, Is completed: False
+2024-12-09 14:02:55,256 - Status: pending, Is completed: False
+2024-12-09 14:03:00,480 - Status: pending, Is completed: False
+2024-12-09 14:03:05,719 - Status: pending, Is completed: False
+2024-12-09 14:03:10,957 - Status: pending, Is completed: False
+2024-12-09 14:03:16,170 - Status: success, Is completed: True
+2024-12-09 14:03:16,172 - Transaction confirmed: success

@@ -11,7 +11,7 @@ pub trait IssueTokenSnowSc {
     #[event("token_issued")]
     fn token_issued_event(
         &self,
-        #[indexed] token_ticker: ManagedBuffer,
+        #[indexed] token_identifier: TokenIdentifier,
         #[indexed] token_name: ManagedBuffer,
         initial_supply: BigUint,
     );
@@ -28,17 +28,12 @@ pub trait IssueTokenSnowSc {
     #[event("log_message")]
     fn log_message_event(&self, #[indexed] message: ManagedBuffer);
 
-    /// Event emitted when token properties are logged.
-    #[event("token_properties_logged")]
-    fn token_properties_logged_event(&self, serialized_properties: ManagedBuffer);
-
     /// Function to handle contract upgrades
     #[upgrade]
     fn upgrade(&self) {
         let caller = self.blockchain().get_caller();
         let owner = self.blockchain().get_owner_address();
 
-        // Only the owner of the smart contract can perform the upgrade
         require!(caller == owner, "Only the owner can upgrade the contract");
     }
 
@@ -60,31 +55,25 @@ pub trait IssueTokenSnowSc {
     ) {
         self.emit_log_message("Starting token issuance process");
 
-        // Ensure payment meets the minimum requirement
         let payment = self.call_value().egld_value();
         let issue_cost = BigUint::from(50_000_000_000_000_000u64); // 0.05 EGLD
         require!(*payment >= issue_cost, "Minimum fee is 0.05 EGLD");
 
-        // Generate a random token name if not provided
         if token_name.is_empty() {
             token_name = self.generate_random_token_name();
         }
 
-        // Validate initial_supply
         require!(
             initial_supply > BigUint::zero(),
             "Initial supply must be greater than 0"
         );
 
-        // Generate and validate a unique token ticker
         let token_ticker = ManagedBuffer::from("SNOW");
         self.emit_log_message("Token ticker set to SNOW");
 
-        // Adjust supply for the fixed number of decimals
         let num_decimals = self.get_decimals();
         let adjusted_supply = initial_supply.clone() * BigUint::from(10u64).pow(num_decimals as u32);
-        
-        // Construct token properties
+
         let properties = FungibleTokenProperties {
             num_decimals,
             can_freeze,
@@ -97,21 +86,7 @@ pub trait IssueTokenSnowSc {
             can_add_special_roles,
         };
 
-        // Serialize properties into a single buffer
-        let serialized_properties = self.serialize_properties(
-            can_freeze, can_wipe, can_pause, can_mint, can_burn,
-            can_change_owner, can_upgrade, can_add_special_roles,
-        );
-
-        // Emit event with serialized properties
-        self.token_properties_logged_event(serialized_properties);
-
-        // Emit token issued event before exiting
-        self.token_issued_event(token_ticker.clone(), token_name.clone(), initial_supply.clone());
-        
-        self.emit_log_message("Issuing token through the ESDT system SC");
-
-        // Call the ESDT system SC to issue the fungible token
+        // Call the ESDT system smart contract to issue the token
         self.send()
             .esdt_system_sc_proxy()
             .issue_fungible(
@@ -121,31 +96,84 @@ pub trait IssueTokenSnowSc {
                 &adjusted_supply,
                 properties,
             )
+            .with_callback(self.callbacks().esdt_issue_callback(
+                self.blockchain().get_caller(),
+            ))
             .async_call_and_exit();
-
-        // Emit token issued event
-
     }
 
-    /// Endpoint to burn tokens.
+    /// Callback for token issuance
+    #[callback]
+    fn esdt_issue_callback(
+        &self,
+        caller: ManagedAddress,
+        #[call_result] result: ManagedAsyncCallResult<()>,
+    ) {
+        let (token_identifier, returned_tokens) = self.call_value().egld_or_single_fungible_esdt();
+        match result {
+            ManagedAsyncCallResult::Ok(()) => {
+                self.emit_log_message("Token issuance successful");
+        
+                let unwrapped_identifier = token_identifier.unwrap_esdt();
+        
+                // Transfer tokens to the caller
+                self.send()
+                    .direct_esdt(
+                        &caller,
+                        &unwrapped_identifier,
+                        0,
+                        &returned_tokens,
+                    );
+        
+                self.emit_log_message("Tokens transferred to the caller");
+        
+                // Emit event for successful issuance
+                self.token_issued_event(
+                    unwrapped_identifier, // Use the unwrapped identifier here
+                    ManagedBuffer::from("Token Name"),
+                    returned_tokens,
+                );
+            }
+            ManagedAsyncCallResult::Err(_err) => {
+                self.emit_log_message("Token issuance failed");
+        
+                // Refund the caller if necessary
+                if token_identifier.is_egld() && returned_tokens > 0 {
+                    self.tx().to(&caller).egld(&returned_tokens).transfer();
+                }
+            }
+        }
+    }
+
+    /// Single endpoint to handle token transfer and burning.
     #[endpoint(burn_token)]
     fn burn_token(
         &self,
-        token_identifier: TokenIdentifier,
-        amount: BigUint<Self::Api>,
+        token_ticker: ManagedBuffer<Self::Api>, // Token ticker as input
+        amount: BigUint<Self::Api>,             // Amount to be burned
     ) {
         self.emit_log_message("Starting token burn process");
 
-        // Ensure amount is positive
-        require!(amount > BigUint::zero(), "Amount to burn must be greater than 0");
+        // Convert the token ticker into a TokenIdentifier
+        let token_identifier = TokenIdentifier::from_esdt_bytes(token_ticker.clone());
 
-        // Call the ESDT system SC to burn the tokens
-        let _: () = self.send()
-            .esdt_system_sc_proxy()
-            .burn(&token_identifier, &amount)
-            .execute_on_dest_context();
+        // Get the contract's balance for the token
+        let contract_address = self.blockchain().get_sc_address();
+        let nonce = 0u64; // Nonce for fungible tokens is always 0
+        let balance = self.blockchain().get_esdt_balance(&contract_address, &token_identifier, nonce);
 
-        // Emit an event for the burned tokens
+        // Validate that the contract has enough tokens to burn
+        require!(balance >= amount, "Insufficient token balance for burn");
+
+        self.emit_log_message("Burning tokens using esdt_local_burn");
+
+        // Perform the burn
+        self.send()
+            .esdt_local_burn(&token_identifier, nonce, &amount);
+
+        self.emit_log_message("Token burn process completed successfully");
+
+        // Emit an event for the burn
         self.token_burned_event(token_identifier, amount);
     }
 
@@ -156,17 +184,17 @@ pub trait IssueTokenSnowSc {
 
     /// Generates a random token name.
     fn generate_random_token_name(&self) -> ManagedBuffer<Self::Api> {
-        let mut name = ManagedBuffer::new();
+        let mut name = ManagedBuffer::new(); // Default constructor
         let block_nonce = self.blockchain().get_block_nonce();
         let block_timestamp = self.blockchain().get_block_timestamp();
 
         let random_seed = block_nonce ^ block_timestamp as u64;
 
         for i in 0..8 {
-            let char_index = ((random_seed >> (i * 5)) & 0x1F) % 36; // Limit range to 36
+            let char_index = ((random_seed >> (i * 5)) & 0x1F) % 36;
             let char = match char_index {
-                0..=9 => b'0' + char_index as u8,    // Numbers
-                10..=35 => b'A' + (char_index - 10) as u8, // Uppercase letters
+                0..=9 => b'0' + char_index as u8,
+                10..=35 => b'A' + (char_index - 10) as u8,
                 _ => unreachable!(),
             };
 
@@ -176,32 +204,36 @@ pub trait IssueTokenSnowSc {
         name
     }
 
-    /// Emit a log message event.
-    fn emit_log_message(&self, message: &str) {
-        self.log_message_event(ManagedBuffer::from(message));
+    fn biguint_to_string(&self, biguint: &BigUint<Self::Api>) -> ManagedBuffer<Self::Api> {
+        let mut result = ManagedBuffer::new();
+        let mut value = biguint.clone();
+        let ten = BigUint::from(10u32);
+    
+        if value == BigUint::zero() {
+            result.append_bytes(b"0");
+            return result;
+        }
+    
+        // Create a temporary buffer for storing digits
+        let mut temp_buffer: [u8; 64] = [0; 64]; // Assuming BigUint fits within 64 digits
+        let mut index = temp_buffer.len();
+    
+        while value > BigUint::zero() {
+            let digit = (&value % &ten).to_u64().unwrap(); // Extract the last digit
+            index -= 1;
+            temp_buffer[index] = b'0' + digit as u8; // Store ASCII representation in temp buffer
+            value /= &ten; // Divide by 10
+        }
+    
+        // Append the digits from temp_buffer to result
+        result.append_bytes(&temp_buffer[index..]);
+    
+        result
     }
 
-    /// Serializes token properties into a `ManagedBuffer`.
-    fn serialize_properties(
-        &self,
-        can_freeze: bool,
-        can_wipe: bool,
-        can_pause: bool,
-        can_mint: bool,
-        can_burn: bool,
-        can_change_owner: bool,
-        can_upgrade: bool,
-        can_add_special_roles: bool,
-    ) -> ManagedBuffer<Self::Api> {
-        let mut buffer = ManagedBuffer::new();
-        buffer.append_bytes(&[can_freeze as u8]);
-        buffer.append_bytes(&[can_wipe as u8]);
-        buffer.append_bytes(&[can_pause as u8]);
-        buffer.append_bytes(&[can_mint as u8]);
-        buffer.append_bytes(&[can_burn as u8]);
-        buffer.append_bytes(&[can_change_owner as u8]);
-        buffer.append_bytes(&[can_upgrade as u8]);
-        buffer.append_bytes(&[can_add_special_roles as u8]);
-        buffer
+    /// Emit a log message event.
+    fn emit_log_message(&self, message: &str) {
+        let log_buffer = ManagedBuffer::from(message);
+        self.log_message_event(log_buffer);
     }
 }

@@ -1,9 +1,9 @@
 import logging
 import time
 from pathlib import Path
-from multiversx_sdk import Address, AddressComputer, SmartContractTransactionsOutcomeParser, TransactionComputer, UserSigner, ProxyNetworkProvider, SmartContractTransactionsFactory, TransactionsConverter
+from multiversx_sdk import Address, AddressComputer, SmartContractTransactionsOutcomeParser, TransactionComputer, TransactionsFactoryConfig, UserSigner, ProxyNetworkProvider, SmartContractTransactionsFactory, TransactionsConverter
 from multiversx_sdk.abi import Abi
-from helper import Config
+from utilities import Utilities
 
 LOG_FILE = "sc_deploy.log"
 # Configuration for the blockchain connection
@@ -16,33 +16,8 @@ CHAIN_ID = "D"
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s", handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler()])
 proxy = ProxyNetworkProvider(PROXY_URL)
-
-
-def wait_for_transaction(proxy: ProxyNetworkProvider, tx_hash: str, timeout: int = 60):
-    """
-    Waits for the transaction to finalize by polling its status.
-    """
-    start_time = time.time()
-    while True:
-        transaction_on_network = proxy.get_transaction(tx_hash)
-        status = transaction_on_network.status
-
-        logging.info(f"Transaction status: {status}")
-
-        if transaction_on_network.status.is_successful() or transaction_on_network.status.is_executed():
-            logging.info("Transaction successfully finalized.")
-            return transaction_on_network
-        elif transaction_on_network.status.is_failed() or transaction_on_network.status.is_invalid():
-            logging.error(f"Transaction failed with status: {status}")
-            raise RuntimeError(f"Transaction failed with status: {status}")
-
-        # Check for timeout
-        if time.time() - start_time > timeout:
-            raise TimeoutError(f"Transaction not finalized within {timeout} seconds.")
-
-        # Poll every 5 seconds
-        time.sleep(5)
-
+transaction_computer = TransactionComputer()
+transaction_converter = TransactionsConverter()
 
 def deploy_smart_contract():
     # Load account and signer
@@ -62,15 +37,13 @@ def deploy_smart_contract():
     abi = Abi.load(Path(ABI_PATH))
 
     # Define config
-    config = Config(chain_id=CHAIN_ID, min_gas_limit=50_000, gas_limit_per_byte=1_500)
-
+    config = TransactionsFactoryConfig(CHAIN_ID)
     # Create transaction factory
     factory = SmartContractTransactionsFactory(config=config, abi=abi)
 
     logging.info(f"SmartContractTransactionsFactory created")
     logging.info(f"SmartContractTransactionsFactory config: {str(factory.config)}")
 
-    transaction_computer = TransactionComputer()
     # Deploy transaction
     deploy_transaction = factory.create_transaction_for_deploy(sender=sc_owner_address, bytecode=bytecode, gas_limit=15_000_000, is_upgradeable=True, is_readable=True, is_payable=True)
     deploy_transaction.nonce = current_nonce
@@ -82,7 +55,6 @@ def deploy_smart_contract():
 
     logging.info(f"Contract address: [{contract_address.to_bech32()}]")
 
-    transaction_converter = TransactionsConverter()
     logging.info(f"Transaction: {transaction_converter.transaction_to_dictionary(deploy_transaction)}")
     logging.info(f"Transaction data: {deploy_transaction.data.decode()}")
 
@@ -100,7 +72,7 @@ def deploy_smart_contract():
 
     # Wait for the transaction to finalize
     try:
-        finalized_transaction = wait_for_transaction(proxy, tx_hash)
+        finalized_transaction = Utilities.wait_for_transaction(proxy, tx_hash)
         logging.info("Transaction finalized successfully.")
     except (TimeoutError, RuntimeError) as e:
         logging.error(f"Failed to finalize transaction: {e}")

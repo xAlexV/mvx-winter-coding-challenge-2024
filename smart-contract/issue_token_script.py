@@ -2,8 +2,8 @@ import logging
 import time
 import os
 from pathlib import Path
-from multiversx_sdk import ProxyNetworkProvider, Transaction, TransactionComputer, UserSigner, Address, SmartContractTransactionsFactory, TransactionsConverter
-from random import choice
+from multiversx_sdk import NetworkProviderConfig, ProxyNetworkProvider, Transaction, TransactionComputer, UserSigner, Address, SmartContractTransactionsFactory, TransactionsConverter
+import argparse
 from utilities import Utilities
 
 # Configuration
@@ -17,7 +17,6 @@ TOKEN_NAME = "SantaClaus"  # Leave empty to generate a random name
 TOKEN_SUPPLY = 1_000_000_000
 ISSUE_COST = 0.06 * 10**18  # 0.06 EGLD in smallest denomination
 TOKEN_GAS_LIMIT = 60_000_000
-SC_ENDPOINT = "issue_token_snow" # use issue_token_snow_and_transfer to issue token and transfer to wallet or issue_token_snow to issue token which stays in SC
 
 # Token property constants
 TOKEN_PROPERTIES = {
@@ -33,11 +32,12 @@ TOKEN_PROPERTIES = {
 
 # Logging setup
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s", handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler()])
-proxy = ProxyNetworkProvider(PROXY_URL)
+config = NetworkProviderConfig("MvxWinterChallenge2024")
+proxy = ProxyNetworkProvider(PROXY_URL, config=config)
 transaction_computer = TransactionComputer()
 
 
-def issue_snow_tokens():
+def issue_snow_tokens(endpoint: str):
     # Validate ABI existence
     if not Path(ABI_PATH).exists():
         logging.error("ABI file not found. Please check the path.")
@@ -62,7 +62,7 @@ def issue_snow_tokens():
         Utilities.encode_boolean(TOKEN_PROPERTIES["can_add_special_roles"]),
     ]
 
-    payload = f"{SC_ENDPOINT}@{name_hex}@{supply_hex}@" + "@".join(properties_hex)
+    payload = f"{endpoint}@{name_hex}@{supply_hex}@" + "@".join(properties_hex)
     logging.info(f"Payload: {payload}")
 
     # Create and sign the transaction
@@ -93,4 +93,19 @@ def issue_snow_tokens():
 
 
 if __name__ == "__main__":
-    issue_snow_tokens()
+    # Parse arguments
+    parser = argparse.ArgumentParser(description="Issue Snow Tokens")
+    parser.add_argument(
+        "--with-transfer",
+        type=int,
+        default=0,
+        help="Set to 1 to use the issue_token_snow_and_transfer endpoint, otherwise issue_token_snow is used.",
+    )
+    args = parser.parse_args()
+
+    # Determine the endpoint based on the argument
+    endpoint = "issue_token_snow_and_transfer" if args.with_transfer else "issue_token_snow"
+    logging.info(f"Using endpoint: {endpoint}")
+
+    # Issue tokens
+    issue_snow_tokens(endpoint)

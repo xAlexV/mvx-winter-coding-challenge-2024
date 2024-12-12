@@ -24,6 +24,15 @@ pub trait IssueTokenSnowSc {
         initial_supply: BigUint,
     );
 
+    /// Event emitted when tokens are claimed.
+    #[event("tokens_claimed")]
+    fn tokens_claimed_event(
+        &self,
+        #[indexed] token_identifier: TokenIdentifier,
+        #[indexed] caller: ManagedAddress,
+        amount: BigUint,
+    );
+
     /// Event emitted when a token is burned.
     #[event("token_burned")]
     fn token_burned_event(
@@ -104,7 +113,45 @@ pub trait IssueTokenSnowSc {
                 &adjusted_supply,
                 properties,
             )
+            .with_callback(self.callbacks().esdt_issue_callback(
+                self.blockchain().get_caller(),
+            ))
             .async_call_and_exit();
+    }
+
+    /// Callback for token issuance
+    #[callback]
+    fn esdt_issue_callback(
+        &self,
+        caller: ManagedAddress,
+        #[call_result] result: ManagedAsyncCallResult<()>,
+    ) {
+        let (token_identifier, returned_tokens) = self.call_value().egld_or_single_fungible_esdt();
+        match result {
+            ManagedAsyncCallResult::Ok(()) => {
+                self.emit_log_message("Token issuance successful");
+        
+                let unwrapped_identifier = token_identifier.unwrap_esdt();
+                
+                // Update the user's balance in storage
+                self.update_user_balance(caller.clone(), unwrapped_identifier.clone(), returned_tokens.clone());
+                
+                // Emit event for successful issuance
+                self.token_issued_event(
+                    unwrapped_identifier, // Use the unwrapped identifier here
+                    ManagedBuffer::from("Token Name"),
+                    returned_tokens,
+                );
+            }
+            ManagedAsyncCallResult::Err(_err) => {
+                self.emit_log_message("Token issuance failed");
+        
+                // Refund the caller if necessary
+                if token_identifier.is_egld() && returned_tokens > 0 {
+                    self.tx().to(&caller).egld(&returned_tokens).transfer();
+                }
+            }
+        }
     }
 
     /// Endpoint to issue a fungible token.
@@ -166,7 +213,7 @@ pub trait IssueTokenSnowSc {
                 &adjusted_supply,
                 properties,
             )
-            .with_callback(self.callbacks().esdt_issue_callback(
+            .with_callback(self.callbacks().esdt_issue_and_transfer_callback(
                 self.blockchain().get_caller(),
             ))
             .async_call_and_exit();
@@ -174,7 +221,7 @@ pub trait IssueTokenSnowSc {
 
     /// Callback for token issuance
     #[callback]
-    fn esdt_issue_callback(
+    fn esdt_issue_and_transfer_callback(
         &self,
         caller: ManagedAddress,
         #[call_result] result: ManagedAsyncCallResult<()>,
@@ -217,6 +264,34 @@ pub trait IssueTokenSnowSc {
                 }
             }
         }
+    }
+
+    /// Endpoint to claim tokens.
+    #[endpoint(claim_tokens)]
+    fn claim_tokens(&self, token_identifier: TokenIdentifier<Self::Api>) {
+        let caller = self.blockchain().get_caller();
+
+        // Verify the caller has tokens to claim
+        let key = (caller.clone(), token_identifier.clone());
+        let user_balance = self
+            .issued_tokens()
+            .get(&key)
+            .unwrap_or_else(BigUint::zero);
+
+        require!(
+            user_balance > BigUint::zero(),
+            "No tokens available to claim for this user"
+        );
+
+        // Transfer tokens to the caller
+        self.send()
+            .direct_esdt(&caller, &token_identifier, 0, &user_balance);
+
+        // Update storage: remove claimed tokens
+        self.issued_tokens().remove(&key);
+
+        // Emit event
+        self.tokens_claimed_event(token_identifier, caller, user_balance);
     }
 
     /// Single endpoint to handle token transfer and burning.

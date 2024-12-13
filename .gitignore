@@ -7,11 +7,10 @@
 3-dec/output/wallet_erd1w6d4rcfz2shzhnut372c6tvlf83p3cf0dsld9p900ftkggxsfess6nuk50.json
 3-dec/output/wallet_erd10jl8el930pu87jcflrwtsvr5qnynrh923wwyapdkevv92n88qeaqqdhdns.json
 3-dec/output/wallet_erd19q586tm8k5vzjwsmmy7v85e2yc899wqulw5pur0k377ueylckzls0gaflu.json
-3-dec/script_output.log
 3-dec/funding_wallet.json
 smart-contract/__pycache__/helper.cpython-313.pyc
 smart-contract/issue-token-snow-sc/output/*
 smart-contract/issue-token-snow-sc/target/.rustc_info.json
 smart-contract/issue-token-snow-sc/target/*
 smart-contract/__pycache__/utilities.cpython-313.pyc
-smart-contract/*.log
+*.log

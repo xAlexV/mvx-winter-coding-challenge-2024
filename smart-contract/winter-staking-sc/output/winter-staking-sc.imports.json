@@ -1,0 +1,14 @@
+[
+  "checkNoPayment",
+  "getBlockEpoch",
+  "getNumArguments",
+  "mBufferAppend",
+  "mBufferGetByteSlice",
+  "mBufferGetLength",
+  "mBufferSetBytes",
+  "mBufferStorageLoad",
+  "mBufferStorageStore",
+  "managedCaller",
+  "managedGetMultiESDTCallValue",
+  "signalError"
+]

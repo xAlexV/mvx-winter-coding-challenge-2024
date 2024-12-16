@@ -4,12 +4,11 @@ from pathlib import Path
 from multiversx_sdk import Address, AddressComputer, SmartContractTransactionsOutcomeParser, TransactionComputer, TransactionsFactoryConfig, UserSigner, ProxyNetworkProvider, SmartContractTransactionsFactory, TransactionsConverter
 from multiversx_sdk.abi import Abi
 from utilities import Utilities
+import argparse
 
 LOG_FILE = "sc_deploy.log"
+
 # Configuration for the blockchain connection
-SC_OWNER_WALLET_PATH = "../3-dec/funding_wallet.json"
-WASM_PATH = "./issue-token-snow-sc/output/issue-token-snow-sc.wasm"
-ABI_PATH = "./issue-token-snow-sc/output/issue-token-snow-sc.abi.json"
 API_URL = "https://devnet-api.multiversx.com"
 PROXY_URL = "https://devnet-gateway.multiversx.com"
 CHAIN_ID = "D"
@@ -19,9 +18,9 @@ proxy = ProxyNetworkProvider(PROXY_URL)
 transaction_computer = TransactionComputer()
 transaction_converter = TransactionsConverter()
 
-def deploy_smart_contract():
+def deploy_smart_contract(sc_owner_wallet_path, wasm_path, abi_path):
     # Load account and signer
-    signer = UserSigner.from_wallet(Path(SC_OWNER_WALLET_PATH), "password")
+    signer = UserSigner.from_wallet(Path(sc_owner_wallet_path), "password")
     sc_owner_address = signer.get_pubkey().to_address(hrp="erd")
     logging.info(f"Address used to deploy the smart contract: [{sc_owner_address.to_bech32()}]")
 
@@ -30,11 +29,11 @@ def deploy_smart_contract():
     current_nonce = sender_on_network.nonce
 
     # Smart contract deployment parameters
-    bytecode_path = Path(WASM_PATH)
+    bytecode_path = Path(wasm_path)
     bytecode = bytecode_path.read_bytes()
 
     # Load ABI
-    abi = Abi.load(Path(ABI_PATH))
+    abi = Abi.load(Path(abi_path))
 
     # Define config
     config = TransactionsFactoryConfig(CHAIN_ID)
@@ -58,7 +57,6 @@ def deploy_smart_contract():
     logging.info(f"Transaction: {transaction_converter.transaction_to_dictionary(deploy_transaction)}")
     logging.info(f"Transaction data: {deploy_transaction.data.decode()}")
 
-
     # Send the transaction
     tx_hash = proxy.send_transaction(deploy_transaction)
     logging.info(f"Deployment transaction sent: {tx_hash}")
@@ -68,7 +66,6 @@ def deploy_smart_contract():
     parser = SmartContractTransactionsOutcomeParser()
     parsed_outcome = parser.parse_deploy(transaction_outcome)
     logging.info(f"Parsed outcome: {parsed_outcome}")
-
 
     # Wait for the transaction to finalize
     try:
@@ -80,6 +77,29 @@ def deploy_smart_contract():
 
     logging.info(f"Smart contract deployed at: {contract_address.to_bech32()}")
 
-
 if __name__ == "__main__":
-    deploy_smart_contract()
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="Deploy a smart contract to MultiversX.")
+    parser.add_argument(
+        "--sc-owner-wallet-path",
+        required=True,
+        help="Path to the smart contract owner wallet file (e.g., '../3-dec/funding_wallet.json')."
+    )
+    parser.add_argument(
+        "--wasm-path",
+        required=True,
+        help="Path to the WASM file for the smart contract (e.g., './issue-token-snow-sc/output/issue-token-snow-sc.wasm')."
+    )
+    parser.add_argument(
+        "--abi-path",
+        required=True,
+        help="Path to the ABI file for the smart contract (e.g., './issue-token-snow-sc/output/issue-token-snow-sc.abi.json')."
+    )
+
+    args = parser.parse_args()
+
+    deploy_smart_contract(
+        sc_owner_wallet_path=args.sc_owner_wallet_path,
+        wasm_path=args.wasm_path,
+        abi_path=args.abi_path
+    )

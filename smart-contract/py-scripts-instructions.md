@@ -31,19 +31,19 @@ sc-meta all build
 - this should generate the wasm and abi files in output folder
 
 # Deploy the contract
-- we're going to use the script deploy_snow_token_contract.py
+- we're going to use the script deploy_smart_contract.py.py
 - change constants if needed
 ```
-SC_OWNER_WALLET_PATH = "../3-dec/funding_wallet.json" # replace with your wallet file
-WASM_PATH = "./issue-token-snow-sc/output/issue-token-snow-sc.wasm" # path to wasm file
-ABI_PATH = "./issue-token-snow-sc/output/issue-token-snow-sc.abi.json" # path to abi file
 API_URL = "https://devnet-api.multiversx.com"
 PROXY_URL = "https://devnet-gateway.multiversx.com"
 CHAIN_ID = "D"
 ```
-- run
+- run the script with expected arguments
 ```shell
-python deploy_snow_token_contract.py
+python deploy_smart_contract.py \
+  --sc-owner-wallet-path "../3-dec/funding_wallet.json" \
+  --wasm-path "./issue-token-snow-sc/output/issue-token-snow-sc.wasm" \
+  --abi-path "./issue-token-snow-sc/output/issue-token-snow-sc.abi.json"
 ```
 - output can be viewed in sc_deploy.log
 - contract address should be visibile in the log file. save it as it will be used later.

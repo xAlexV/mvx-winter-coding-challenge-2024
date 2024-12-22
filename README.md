@@ -128,4 +128,16 @@ Includes batch claim functionality.
 
 ---
 
+### **21 December - Tool NFT Minting Smart Contract**
+- **Description**: Enables users to mint a "Shield" NFT by consuming `2 ORE` tokens. Users must claim the NFT after 1 hour of submitting a mint request. The contract ensures that resources are burned, and the claim process is securely timed.
+- **Artifacts**:
+  - [Smart Contract Code](smart-contract/tool-nft-minting-sc)
+  - [Smart Contract Description](smart-contract/tool-nft-minting-sc-info.md)
+
+#### Scripts:
+- [Deploy Smart Contract](smart-contract/deploy_smart_contract.py)
+- [Update Smart Contract](smart-contract/upgrade_sc.py)
+
+---
+
 Each challenge folder includes detailed instructions and scripts for reproducing the results. See the linked `.md` files for more information.

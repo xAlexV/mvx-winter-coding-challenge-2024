@@ -19,4 +19,6 @@ smart-contract/citizen-nft-minting-sc/target/.rustc_info.json
 smart-contract/citizen-nft-minting-sc/target/*
 smart-contract/ore-minting-sc/target/.rustc_info.json
 smart-contract/ore-minting-sc/target/*
+smart-contract/tool-nft-minting-sc/target/.rustc_info.json
+smart-contract/tool-nft-minting-sc/target/*
 *.log

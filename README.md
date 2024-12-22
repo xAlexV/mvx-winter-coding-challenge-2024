@@ -104,8 +104,8 @@ Includes batch claim functionality.
 
 ---
 
-### **18 December - Citizen NFT Minting Smart Contract**
-- **Description**: Implemented a smart contract where users can mint a “CITIZEN” NFT by burning 10 wood and 15 food.
+### **18, 20 December - Citizen NFT Minting Smart Contract**
+- **Description**: Implemented a smart contract where users can mint a “CITIZEN” NFT by burning 10 wood and 15 food and that can upgrade the CITIZEN to a SOLDIER by spending 5 gold and 5 ore.
 - **Artifacts**:
   - [Smart Contract Code](smart-contract/citizen-nft-minting-sc)
   - [Smart Contract Description](smart-contract/citizen-nft-minting-sc-info.md)

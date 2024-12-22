@@ -17,7 +17,7 @@
         }
     },
     "docs": [
-        "Smart contract to mint \"CITIZEN\" NFTs by burning required tokens."
+        "Smart contract to mint \"CITIZEN\" NFTs and upgrade them to \"SOLDIER\" NFTs using dyNFT features."
     ],
     "name": "CitizenNftMintingSc",
     "constructor": {
@@ -55,6 +55,37 @@
             "mutability": "mutable",
             "inputs": [],
             "outputs": []
+        },
+        {
+            "docs": [
+                "Endpoint to request an upgrade from Citizen to Soldier"
+            ],
+            "name": "request_upgrade_to_soldier",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "citizen_nonce",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Endpoint to finalize the upgrade to Soldier"
+            ],
+            "name": "claim_soldier",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "citizen_nonce",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
         }
     ],
     "events": [
@@ -77,7 +108,29 @@
         },
         {
             "docs": [
-                "Emit an event for NFT claim"
+                "Emit an event for upgrade request"
+            ],
+            "identifier": "upgrade_request_event",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "citizen_nonce",
+                    "type": "u64",
+                    "indexed": true
+                },
+                {
+                    "name": "timestamp",
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "docs": [
+                "Emit an event for NFT claim or upgrade"
             ],
             "identifier": "claim_event",
             "inputs": [

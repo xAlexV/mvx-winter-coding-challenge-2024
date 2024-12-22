@@ -14,6 +14,7 @@
   "mBufferCopyByteSlice",
   "mBufferEq",
   "mBufferFromBigIntUnsigned",
+  "mBufferGetArgument",
   "mBufferGetByteSlice",
   "mBufferGetLength",
   "mBufferNew",

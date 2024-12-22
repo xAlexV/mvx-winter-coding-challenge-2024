@@ -31,6 +31,20 @@
     "endpoints": [
         {
             "docs": [
+                "Endpoint to set or update the beneficiary"
+            ],
+            "name": "set_beneficiary",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "new_beneficiary",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "docs": [
                 "Endpoint to stake WINTER tokens"
             ],
             "name": "stake_token_winter",
@@ -71,6 +85,24 @@
                 {
                     "name": "stake_data",
                     "type": "tuple<TokenIdentifier,BigUint>"
+                }
+            ]
+        },
+        {
+            "docs": [
+                "Emit an event for setting a beneficiary"
+            ],
+            "identifier": "beneficiary_set_event",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "beneficiary",
+                    "type": "Address",
+                    "indexed": true
                 }
             ]
         },

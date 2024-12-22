@@ -23,6 +23,27 @@ pub trait WinterStakingSc {
     #[storage_mapper("last_reward_claim")]
     fn last_reward_claim(&self, user: &ManagedAddress) -> SingleValueMapper<u64>;
 
+    /// Storage to track the beneficiary for reward transfers
+    #[storage_mapper("beneficiary")]
+    fn beneficiary(&self, user: &ManagedAddress) -> SingleValueMapper<ManagedAddress<Self::Api>>;
+
+    /// Endpoint to set or update the beneficiary
+    #[endpoint(set_beneficiary)]
+    fn set_beneficiary(&self, new_beneficiary: ManagedAddress) {
+        let caller = self.blockchain().get_caller();
+
+        // Ensure the beneficiary address is valid and different from the caller
+        require!(
+            new_beneficiary != caller,
+            "Beneficiary cannot be the same as the caller"
+        );
+
+        self.beneficiary(&caller).set(new_beneficiary.clone());
+
+        // Emit an event for beneficiary update
+        self.beneficiary_set_event(caller, new_beneficiary);
+    }
+
     /// Endpoint to stake WINTER tokens
     #[payable("*")]
     #[endpoint(stake_token_winter)]
@@ -92,7 +113,7 @@ pub trait WinterStakingSc {
         let caller = self.blockchain().get_caller();
         let current_timestamp = self.blockchain().get_block_timestamp();
         let last_claim = self.last_reward_claim(&caller).get();
-        
+
         // Ensure 24 hours have passed since the last claim
         let one_day_in_seconds = 24 * 60 * 60;
         require!(
@@ -113,6 +134,13 @@ pub trait WinterStakingSc {
 
         require!(total_rewards > 0, "No rewards available to claim");
 
+        // Determine the reward recipient
+        let reward_recipient = if self.beneficiary(&caller).is_empty() {
+            caller.clone()
+        } else {
+            self.beneficiary(&caller).get()
+        };
+
         // Mint reward tokens
         let reward_token = TokenIdentifier::from("SNOW-ab6b96".as_bytes());
         self.send().esdt_local_mint(
@@ -121,9 +149,9 @@ pub trait WinterStakingSc {
             &total_rewards,
         );
 
-        // Transfer rewards to the caller
+        // Transfer rewards to the recipient
         self.send().direct_esdt(
-            &caller,
+            &reward_recipient,
             &reward_token,
             0,
             &total_rewards,
@@ -132,6 +160,15 @@ pub trait WinterStakingSc {
         // Update the last reward claim timestamp
         self.last_reward_claim(&caller).set(current_timestamp);
     }
+
+    /// Emit an event for setting a beneficiary
+    #[event("beneficiary_set_event")]
+    fn beneficiary_set_event(
+        &self,
+        #[indexed] user: ManagedAddress,
+        #[indexed] beneficiary: ManagedAddress,
+    );
+
 
     /// Emit an event for rewards
     #[event("reward_event")]

@@ -1,5 +1,6 @@
 [
   "bigIntAdd",
+  "bigIntCmp",
   "bigIntSetInt64",
   "bigIntSign",
   "bigIntTDiv",

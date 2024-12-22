@@ -17,7 +17,7 @@
         }
     },
     "docs": [
-        "An empty contract. To be used as a template when starting a new contract from scratch."
+        "Smart contract for minting resources based on staked \"WINTER\" tokens."
     ],
     "name": "ResourceMintingSc",
     "constructor": {
@@ -52,6 +52,15 @@
                 "Endpoint to mint resource tokens"
             ],
             "name": "mint_resources",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Endpoint to claim minted resources"
+            ],
+            "name": "claim_resources",
             "mutability": "mutable",
             "inputs": [],
             "outputs": []

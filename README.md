@@ -83,7 +83,7 @@ Includes batch claim functionality.
 
 ---
 
-### **13, 15, 16 December - Winter Staking Smart Contract**
+### **13, 14, 15 December - Winter Staking Smart Contract**
 - **Description**: Implemented a staking smart contract for `WINTER` tokens with epoch tracking and event emission.
 - **Artifacts**:
   - [Smart Contract Code](smart-contract/winter-staking-sc)
@@ -91,7 +91,7 @@ Includes batch claim functionality.
 
 ---
 
-### **17 December - Resource Minting Smart Contract**
+### **16, 17 December - Resource Minting Smart Contract**
 - **Description**: Implemented a smart contract with functionality for users to mint basic resources based on staked “WINTER” tokens: stone/gold/wood/food.
 - **Artifacts**:
   - [Smart Contract Code](smart-contract/resource-minting-sc)

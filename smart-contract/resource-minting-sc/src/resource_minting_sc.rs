@@ -3,7 +3,7 @@
 #[allow(unused_imports)]
 use multiversx_sc::imports::*;
 
-/// An empty contract. To be used as a template when starting a new contract from scratch.
+/// Smart contract for minting resources based on staked "WINTER" tokens.
 #[multiversx_sc::contract]
 pub trait ResourceMintingSc {
     /// Initializes the smart contract
@@ -22,6 +22,10 @@ pub trait ResourceMintingSc {
     /// Storage to track last minting round for each user
     #[storage_mapper("last_minting_round")]
     fn last_minting_round(&self, user: &ManagedAddress) -> SingleValueMapper<u64>;
+
+    /// Storage to track unclaimed resources for each user
+    #[storage_mapper("unclaimed_resources")]
+    fn unclaimed_resources(&self, user: &ManagedAddress) -> SingleValueMapper<BigUint<Self::Api>>;
 
     /// Endpoint to stake WINTER tokens
     #[payable("*")]
@@ -66,7 +70,14 @@ pub trait ResourceMintingSc {
         let caller = self.blockchain().get_caller();
         let current_round = self.blockchain().get_block_round();
         let last_round = self.last_minting_round(&caller).get();
-        
+        let unclaimed = self.unclaimed_resources(&caller).get();
+
+        // Ensure no unclaimed resources exist
+        require!(
+            unclaimed == BigUint::zero(),
+            "Unclaimed resources must be claimed before minting"
+        );
+
         let resource_rounds = if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref() == b"WOOD" {
             600
         } else if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref() == b"FOOD" {
@@ -100,17 +111,31 @@ pub trait ResourceMintingSc {
 
         require!(total_mintable > 0, "No resources to mint");
 
-        // Mint and transfer the resource token
+        // Update unclaimed resources
+        self.unclaimed_resources(&caller).set(total_mintable.clone());
+
+        // Update the last minting round
+        self.last_minting_round(&caller).set(current_round);
+    }
+
+    /// Endpoint to claim minted resources
+    #[endpoint(claim_resources)]
+    fn claim_resources(&self) {
+        let caller = self.blockchain().get_caller();
+        let unclaimed = self.unclaimed_resources(&caller).get();
+
+        require!(unclaimed > BigUint::zero(), "No resources to claim");
+
         let resource_token = TokenIdentifier::from("WOOD".as_bytes()); // Adjust dynamically as needed
         self.send().esdt_local_mint(
             &resource_token,
             0,
-            &total_mintable,
+            &unclaimed,
         );
-        self.send().direct_esdt(&caller, &resource_token, 0, &total_mintable);
+        self.send().direct_esdt(&caller, &resource_token, 0, &unclaimed);
 
-        // Update the last minting round
-        self.last_minting_round(&caller).set(current_round);
+        // Clear unclaimed resources
+        self.unclaimed_resources(&caller).clear();
     }
 
     /// Emit an event for resource minting
@@ -125,6 +150,4 @@ pub trait ResourceMintingSc {
     #[only_owner]
     #[upgrade]
     fn upgrade(&self) {}
-
 }
-

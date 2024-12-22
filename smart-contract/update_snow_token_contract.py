@@ -13,8 +13,9 @@ ABI_PATH = "./winter-staking-sc/output/winter-staking-sc.abi.json"
 API_URL = "https://devnet-api.multiversx.com"
 PROXY_URL = "https://devnet-gateway.multiversx.com"
 CHAIN_ID = "D"
-SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqhv6p5lk6fllusxuaq6fqgrj638gpfznsq7vqg7hj4t"  # Update with the deployed contract address
-# SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqmm40w8anjxdr9mrtcag0a4ydhg4a9ukfq7vqrfujc7"  # Update with the deployed contract address
+SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqsu4kcx5fawwhjg8acpm4wppcqdpwcsagq7vqugfwjm"  # Resource minting sc
+# SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqhv6p5lk6fllusxuaq6fqgrj638gpfznsq7vqg7hj4t"  # Winter staking sc
+# SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqmm40w8anjxdr9mrtcag0a4ydhg4a9ukfq7vqrfujc7"  # Snow token issue sc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s", handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler()])
 proxy = ProxyNetworkProvider(PROXY_URL)

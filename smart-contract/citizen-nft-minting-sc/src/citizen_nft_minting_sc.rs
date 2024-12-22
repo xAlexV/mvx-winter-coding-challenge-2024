@@ -13,9 +13,9 @@ pub trait CitizenNftMintingSc {
     #[storage_mapper("mint_requests")]
     fn mint_requests(&self, user: &ManagedAddress) -> SingleValueMapper<u64>;
 
-    /// Storage to track claimable NFTs for users
-    #[storage_mapper("claimable_nfts")]
-    fn claimable_nfts(&self, user: &ManagedAddress) -> SingleValueMapper<u64>;
+    /// Storage to track the token identifiers used for minting
+    #[storage_mapper("token_identifiers")]
+    fn token_identifiers(&self, user: &ManagedAddress) -> SingleValueMapper<(TokenIdentifier<Self::Api>, TokenIdentifier<Self::Api>)>;
 
     /// Endpoint to request minting a "CITIZEN" NFT
     #[payable("*")]
@@ -24,25 +24,49 @@ pub trait CitizenNftMintingSc {
         let caller = self.blockchain().get_caller();
         let current_timestamp = self.blockchain().get_block_timestamp();
 
-        // Require two payments: 10 WOOD and 15 FOOD
+        // Initialize token identifiers and amounts
+        let mut wood_token_id = None;
+        let mut food_token_id = None;
         let mut wood_amount = BigUint::zero();
         let mut food_amount = BigUint::zero();
 
         for payment in self.call_value().all_esdt_transfers().iter() {
-            match payment.token_identifier.as_managed_buffer().to_boxed_bytes().as_ref() {
-                b"WOOD" => wood_amount += payment.amount.clone(),
-                b"FOOD" => food_amount += payment.amount.clone(),
-                _ => require!(false, "Only WOOD and FOOD tokens are accepted"),
+            let token_bytes = payment.token_identifier.as_managed_buffer().to_boxed_bytes();
+            let token_bytes_slice = token_bytes.as_ref();
+
+            if token_bytes_slice.starts_with(b"WOOD-") {
+                wood_token_id = Some(payment.token_identifier.clone());
+                wood_amount += payment.amount.clone();
+            } else if token_bytes_slice.starts_with(b"FOOD-") {
+                food_token_id = Some(payment.token_identifier.clone());
+                food_amount += payment.amount.clone();
+            } else {
+                require!(false, "Only WOOD and FOOD tokens are accepted");
             }
         }
+
+        // Ensure both tokens are provided
+        require!(wood_token_id.is_some(), "WOOD token is missing");
+        require!(food_token_id.is_some(), "FOOD token is missing");
 
         // Validate the required amounts
         require!(wood_amount >= BigUint::from(10u64), "Insufficient WOOD tokens");
         require!(food_amount >= BigUint::from(15u64), "Insufficient FOOD tokens");
 
+        // Save the token identifiers for burning
+        self.token_identifiers(&caller).set((wood_token_id.unwrap(), food_token_id.unwrap()));
+
         // Burn the tokens
-        self.send().esdt_local_burn(&TokenIdentifier::from("WOOD".as_bytes()), 0, &wood_amount);
-        self.send().esdt_local_burn(&TokenIdentifier::from("FOOD".as_bytes()), 0, &food_amount);
+        self.send().esdt_local_burn(
+            &self.token_identifiers(&caller).get().0,
+            0,
+            &wood_amount,
+        );
+        self.send().esdt_local_burn(
+            &self.token_identifiers(&caller).get().1,
+            0,
+            &food_amount,
+        );
 
         // Set the request timestamp
         self.mint_requests(&caller).set(current_timestamp);
@@ -68,8 +92,9 @@ pub trait CitizenNftMintingSc {
             "1 hour must pass before claiming the NFT"
         );
 
-        // Clear the mint request
+        // Clear the mint request and token identifiers
         self.mint_requests(&caller).clear();
+        self.token_identifiers(&caller).clear();
 
         // Issue the NFT
         let nft_token = TokenIdentifier::from("CITIZEN".as_bytes());

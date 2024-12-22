@@ -1,6 +1,5 @@
 [
   "bigIntAdd",
-  "bigIntCmp",
   "bigIntSetInt64",
   "checkNoPayment",
   "cleanReturnData",

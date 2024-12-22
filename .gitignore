@@ -15,4 +15,6 @@ smart-contract/winter-staking-sc/target/.rustc_info.json
 smart-contract/winter-staking-sc/target/*
 smart-contract/resource-minting-sc/target/.rustc_info.json
 smart-contract/resource-minting-sc/target/*
+smart-contract/citizen-nft-minting-sc/target/.rustc_info.json
+smart-contract/citizen-nft-minting-sc/target/*
 *.log

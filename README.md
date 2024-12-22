@@ -97,6 +97,22 @@ Includes batch claim functionality.
   - [Smart Contract Code](smart-contract/resource-minting-sc)
   - [Smart Contract Description](smart-contract/resource-minting-sc-info.md)
 
+#### Scripts:
+- [Deploy Smart Contract](smart-contract/deploy_snow_token_contract.py)
+- [Update Smart Contract](smart-contract/update_snow_token_contract.py)
+- [Enable ESDT minting role](smart-contract/enable_esdt_mint_role_to_sc.py)
+
+---
+
+### **18 December - Citizen NFT Minting Smart Contract**
+- **Description**: Implemented a smart contract where users can mint a “CITIZEN” NFT by burning 10 wood and 15 food.
+- **Artifacts**:
+  - [Smart Contract Code](smart-contract/citizen-nft-minting-sc)
+  - [Smart Contract Description](smart-contract/citizen-nft-minting-sc-info.md)
+
+#### Scripts:
+- [Deploy Smart Contract](smart-contract/deploy_snow_token_contract.py)
+
 ---
 
 Each challenge folder includes detailed instructions and scripts for reproducing the results. See the linked `.md` files for more information.

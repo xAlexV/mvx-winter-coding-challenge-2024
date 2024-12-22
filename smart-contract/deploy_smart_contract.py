@@ -44,7 +44,7 @@ def deploy_smart_contract(sc_owner_wallet_path, wasm_path, abi_path):
     logging.info(f"SmartContractTransactionsFactory config: {str(factory.config)}")
 
     # Deploy transaction
-    deploy_transaction = factory.create_transaction_for_deploy(sender=sc_owner_address, bytecode=bytecode, gas_limit=15_000_000, is_upgradeable=True, is_readable=True, is_payable=True)
+    deploy_transaction = factory.create_transaction_for_deploy(sender=sc_owner_address, bytecode=bytecode, gas_limit=60_000_000, is_upgradeable=True, is_readable=True, is_payable=True)
     deploy_transaction.nonce = current_nonce
     deploy_transaction.signature = signer.sign(transaction_computer.compute_bytes_for_signing(deploy_transaction))
 
@@ -60,6 +60,7 @@ def deploy_smart_contract(sc_owner_wallet_path, wasm_path, abi_path):
     # Send the transaction
     tx_hash = proxy.send_transaction(deploy_transaction)
     logging.info(f"Deployment transaction sent: {tx_hash}")
+    time.sleep(2)
 
     transaction_on_network = proxy.get_transaction(tx_hash)
     transaction_outcome = transaction_converter.transaction_on_network_to_outcome(transaction_on_network)

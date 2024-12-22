@@ -6,9 +6,9 @@
 
 // Init:                                 1
 // Upgrade:                              1
-// Endpoints:                            4
+// Endpoints:                            5
 // Async Callback (empty):               1
-// Total number of exported functions:   7
+// Total number of exported functions:   8
 
 #![no_std]
 
@@ -24,6 +24,7 @@ multiversx_sc_wasm_adapter::endpoints! {
         claim_citizen => claim_citizen
         request_upgrade_to_soldier => request_upgrade_to_soldier
         claim_soldier => claim_soldier
+        upgrade_soldier_with_shield => upgrade_soldier_with_shield
     )
 }
 

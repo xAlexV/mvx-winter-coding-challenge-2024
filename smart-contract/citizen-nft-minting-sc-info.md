@@ -2,7 +2,12 @@
 
 ## Overview
 
-This smart contract enables users to mint a "CITIZEN" NFT by burning required resources (`WOOD` and `FOOD` tokens). Additionally, it allows users to upgrade the "CITIZEN" NFT to a "SOLDIER" NFT by burning `GOLD` and `ORE` tokens. Both processes involve validation, token burning, and timed claim mechanisms to ensure secure and transparent operations.
+This smart contract enables users to:
+1. Mint a "CITIZEN" NFT by burning required resources (`WOOD` and `FOOD` tokens).
+2. Upgrade the "CITIZEN" NFT to a "SOLDIER" NFT by burning `GOLD` and `ORE` tokens.
+3. Further enhance a "SOLDIER" NFT by consuming a "SHIELD" NFT to gain `+1 defense` using the MultiversX dynamic NFT (dyNFT) features.
+
+Each process involves validation, token burning, and timed claim mechanisms to ensure secure and transparent operations.
 
 ---
 
@@ -28,66 +33,82 @@ This smart contract enables users to mint a "CITIZEN" NFT by burning required re
   - **`citizen_nonce`**: The nonce of the "CITIZEN" NFT being upgraded.
   - **`timestamp`**: The timestamp of the upgrade request.
 
+#### **`upgrade_soldier_event`**
+- **Description**: Triggered when a "SOLDIER" NFT is upgraded with a "SHIELD" NFT.
+- **Parameters**:
+  - **`user`**: The address of the user upgrading the "SOLDIER".
+  - **`token_id`**: The token identifier of the "SOLDIER" NFT.
+  - **`nonce`**: The nonce of the "SOLDIER" NFT being upgraded.
+
 #### **`claim_event`**
-- **Description**: Triggered when a user successfully claims their "CITIZEN" NFT or completes an upgrade to "SOLDIER".
+- **Description**: Triggered when a user successfully claims their "CITIZEN" NFT or completes an upgrade.
 - **Parameters**:
   - **`user`**: The address of the user claiming the NFT or upgrade.
 
 ---
 
-### 3. Minting Request
-#### **Function**: `request_mint_citizen`
-- **Endpoint**: `@request_mint_citizen`
-- **Description**: Allows users to request minting of a "CITIZEN" NFT.
+## Processes
 
-- **Details**:
-  - Users must send at least:
-    - `10 WOOD` tokens.
-    - `15 FOOD` tokens.
+### 1. Minting a "CITIZEN" NFT
+#### **Function**: `request_mint_citizen`
+- **Description**: Allows users to request minting of a "CITIZEN" NFT.
+- **Requirements**:
+  - Burn `10 WOOD` tokens.
+  - Burn `15 FOOD` tokens.
   - Only tokens with the `WOOD-` and `FOOD-` prefixes are accepted.
-  - The tokens are validated and burned upon successful request.
-  - The mint request is timestamped.
+- **Workflow**:
+  - Users send the required tokens to the contract.
+  - The contract validates and burns the tokens.
+  - A mint request is recorded with the current timestamp.
   - Emits a `mint_request_event`.
 
----
-
-### 4. Claiming the NFT
 #### **Function**: `claim_citizen`
-- **Endpoint**: `@claim_citizen`
-- **Description**: Allows users to claim their "CITIZEN" NFT.
-
-- **Details**:
-  - Users can claim the NFT 1 hour after submitting a mint request.
-  - The NFT is issued and transferred to the user's address.
+- **Description**: Allows users to claim their minted "CITIZEN" NFT.
+- **Requirements**:
+  - A 1-hour waiting period after the mint request.
+- **Workflow**:
+  - Users call the endpoint to claim the NFT after 1 hour.
+  - The contract issues the NFT and transfers it to the user's address.
   - Emits a `claim_event`.
 
 ---
 
-### 5. Upgrade Request
+### 2. Upgrading a "CITIZEN" to a "SOLDIER"
 #### **Function**: `request_upgrade_to_soldier`
-- **Endpoint**: `@request_upgrade_to_soldier`
 - **Description**: Allows users to request an upgrade of a "CITIZEN" NFT to a "SOLDIER" NFT.
-
-- **Details**:
-  - Users must send at least:
-    - `5 GOLD` tokens.
-    - `5 ORE` tokens.
+- **Requirements**:
+  - Burn `5 GOLD` tokens.
+  - Burn `5 ORE` tokens.
   - Only tokens with the `GOLD-` and `ORE-` prefixes are accepted.
-  - The tokens are validated and burned upon successful request.
-  - The upgrade request is timestamped.
+- **Workflow**:
+  - Users send the required tokens and provide the nonce of their "CITIZEN" NFT.
+  - The contract validates and burns the tokens.
+  - An upgrade request is recorded with the current timestamp.
   - Emits an `upgrade_request_event`.
 
+#### **Function**: `claim_soldier`
+- **Description**: Allows users to finalize the upgrade to a "SOLDIER" NFT.
+- **Requirements**:
+  - A 1-hour waiting period after the upgrade request.
+- **Workflow**:
+  - Users call the endpoint to claim the upgrade after 1 hour.
+  - The contract updates the "CITIZEN" NFT attributes to reflect the "SOLDIER" status using the MultiversX `nft_update_attributes` feature.
+  - Emits a `claim_event`.
+
 ---
 
-### 6. Claiming the Upgrade
-#### **Function**: `claim_soldier`
-- **Endpoint**: `@claim_soldier`
-- **Description**: Allows users to finalize the upgrade of a "CITIZEN" NFT to a "SOLDIER" NFT.
-
-- **Details**:
-  - Users can claim the upgrade 1 hour after submitting an upgrade request.
-  - The "CITIZEN" NFT attributes are updated to reflect the "SOLDIER" status.
-  - Emits a `claim_event`.
+### 3. Enhancing a "SOLDIER" with a "SHIELD"
+#### **Function**: `upgrade_soldier_with_shield`
+- **Description**: Allows users to upgrade a "SOLDIER" NFT by consuming a "SHIELD" NFT.
+- **Requirements**:
+  - Provide the "SOLDIER" NFT token ID and nonce.
+  - Provide the "SHIELD" NFT token ID and nonce.
+- **Workflow**:
+  - Users send both NFTs to the contract.
+  - The contract validates the NFTs.
+  - The "SHIELD" NFT is burned.
+  - The "SOLDIER" NFT attributes are updated to include `defense:+1` using the MultiversX `nft_update_attributes` feature.
+  - Emits an `upgrade_soldier_event`.
 
 ---
 
@@ -110,72 +131,48 @@ This smart contract enables users to mint a "CITIZEN" NFT by burning required re
 
 ---
 
-## Workflow
+## Example Workflows
 
 ### 1. Minting a "CITIZEN" NFT
-- Users call the `request_mint_citizen` endpoint and send:
+- A user calls `request_mint_citizen` and sends:
   - `10 WOOD` tokens.
   - `15 FOOD` tokens.
-- The contract validates the tokens and burns them.
-- A mint request is recorded with the current timestamp.
-- Emits a `mint_request_event`.
-
-### 2. Claiming the "CITIZEN" NFT
-- After 1 hour, users call the `claim_citizen` endpoint.
-- The contract checks:
-  - If the mint request exists.
-  - If the 1-hour waiting period has passed.
-- The "CITIZEN" NFT is issued and transferred to the user's address.
-- Emits a `claim_event`.
-
-### 3. Upgrading to a "SOLDIER" NFT
-- Users call the `request_upgrade_to_soldier` endpoint with:
-  - `5 GOLD` tokens.
-  - `5 ORE` tokens.
-- The contract validates the tokens and burns them.
-- An upgrade request is recorded with the current timestamp.
-- Emits an `upgrade_request_event`.
-
-### 4. Claiming the "SOLDIER" Upgrade
-- After 1 hour, users call the `claim_soldier` endpoint, providing the nonce of the "CITIZEN" NFT to be upgraded.
-- The contract checks:
-  - If the upgrade request exists.
-  - If the 1-hour waiting period has passed.
-- The "CITIZEN" NFT attributes are updated to reflect the "SOLDIER" status.
-- Emits a `claim_event`.
-
----
-
-## Example
-
-### 1. Minting a "CITIZEN" NFT
-- A user requests to mint a "CITIZEN" NFT by sending `10 WOOD` and `15 FOOD` tokens.
 - The contract validates the tokens, burns them, and records the request timestamp.
 - After 1 hour, the user calls `claim_citizen`.
 - The contract issues the "CITIZEN" NFT to the user.
 
-### 2. Upgrading to a "SOLDIER"
-- A user requests an upgrade by sending `5 GOLD` and `5 ORE` tokens, along with the nonce of their "CITIZEN" NFT.
-- The contract validates the tokens, burns them, and records the upgrade request timestamp.
-- After 1 hour, the user calls `claim_soldier` with the nonce of their "CITIZEN" NFT.
+### 2. Upgrading a "CITIZEN" to a "SOLDIER"
+- A user calls `request_upgrade_to_soldier` with:
+  - `5 GOLD` tokens.
+  - `5 ORE` tokens.
+  - The nonce of their "CITIZEN" NFT.
+- The contract validates the tokens, burns them, and records the request timestamp.
+- After 1 hour, the user calls `claim_soldier` with the "CITIZEN" NFT nonce.
 - The contract updates the NFT attributes to reflect the "SOLDIER" status.
+
+### 3. Enhancing a "SOLDIER" with a "SHIELD"
+- A user calls `upgrade_soldier_with_shield` with:
+  - The "SOLDIER" NFT token ID and nonce.
+  - The "SHIELD" NFT token ID and nonce.
+- The contract validates the NFTs and burns the "SHIELD".
+- The "SOLDIER" NFT attributes are updated to include `defense:+1`.
 
 ---
 
 ## Design Considerations
 
 ### 1. Resource Validation
-- The contract ensures only tokens with the correct prefixes are accepted for minting and upgrading.
+- The contract ensures only tokens with valid prefixes are accepted for minting and upgrading.
 
 ### 2. Timing Logic
-- A 1-hour waiting period is enforced for both minting and upgrading to simulate real-world delays.
+- Enforces a 1-hour waiting period for both minting and upgrading operations.
 
-### 3. NFT Attribute Update
-- The NFT's dynamic attributes are updated using the MultiversX `nft_update_attributes` functionality to reflect the upgraded status.
+### 3. Dynamic Attribute Updates
+- The NFT's attributes are dynamically updated using the MultiversX `nft_update_attributes` functionality.
 
 ### 4. Extendability
-- Additional character upgrades can be added with different resource requirements and waiting periods.
+- The contract can be extended to include additional characters, tools, or enhancements.
 
 ---
 
-This smart contract provides a secure and extensible system for minting and upgrading character NFTs through resource burning and dynamic NFT attribute updates.
+This smart contract provides a secure and extensible system for minting, upgrading, and enhancing NFTs through resource burning and dynamic NFT attribute updates.

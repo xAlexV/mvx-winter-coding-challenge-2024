@@ -86,9 +86,60 @@
                 }
             ],
             "outputs": []
+        },
+        {
+            "docs": [
+                "Endpoint to upgrade Soldier with Shield for +1 defense"
+            ],
+            "name": "upgrade_soldier_with_shield",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "citizen_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "citizen_nonce",
+                    "type": "u64"
+                },
+                {
+                    "name": "shield_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "shield_nonce",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
         }
     ],
     "events": [
+        {
+            "docs": [
+                "Emit an event for soldier upgrade"
+            ],
+            "identifier": "upgrade_soldier_event",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "token_id",
+                    "type": "TokenIdentifier",
+                    "indexed": true
+                },
+                {
+                    "name": "nonce",
+                    "type": "u64"
+                }
+            ]
+        },
         {
             "docs": [
                 "Emit an event for mint request"

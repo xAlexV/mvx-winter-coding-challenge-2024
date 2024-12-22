@@ -61,7 +61,7 @@ Includes batch claim functionality.
 
 #### Scripts:
 - [Deploy Smart Contract](smart-contract/deploy_snow_token_contract.py)
-- [Update Smart Contract](smart-contract/update_snow_token_contract.py)
+- [Update Smart Contract](smart-contract/upgrade_sc.py)
 - [Issue Tokens](smart-contract/issue_token_script.py)
 - [Burn Tokens](smart-contract/burn_tokens.py)
 - [Query Smart Contract](smart-contract/query_sc_for_token.py)
@@ -99,7 +99,7 @@ Includes batch claim functionality.
 
 #### Scripts:
 - [Deploy Smart Contract](smart-contract/deploy_snow_token_contract.py)
-- [Update Smart Contract](smart-contract/update_snow_token_contract.py)
+- [Update Smart Contract](smart-contract/upgrade_sc.py)
 - [Enable ESDT minting role](smart-contract/enable_esdt_mint_role_to_sc.py)
 
 ---

@@ -8,14 +8,15 @@ from utilities import Utilities
 LOG_FILE = "sc_update.log"
 # Configuration for the blockchain connection
 SC_OWNER_WALLET_PATH = "../3-dec/funding_wallet.json"
-WASM_PATH = "./winter-staking-sc/output/winter-staking-sc.wasm"
-ABI_PATH = "./winter-staking-sc/output/winter-staking-sc.abi.json"
+WASM_PATH = "./resource-minting-sc/output/resource-minting-sc.wasm"
+ABI_PATH = "./resource-minting-sc/output/resource-minting-sc.abi.json"
 API_URL = "https://devnet-api.multiversx.com"
 PROXY_URL = "https://devnet-gateway.multiversx.com"
 CHAIN_ID = "D"
 SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqsu4kcx5fawwhjg8acpm4wppcqdpwcsagq7vqugfwjm"  # Resource minting sc
 # SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqhv6p5lk6fllusxuaq6fqgrj638gpfznsq7vqg7hj4t"  # Winter staking sc
 # SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqmm40w8anjxdr9mrtcag0a4ydhg4a9ukfq7vqrfujc7"  # Snow token issue sc
+# SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqe87r7wd35tms509ywt3nw4fjnsapqvqcq7vqpwnljx"  # Citizen NFT minting sc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s", handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler()])
 proxy = ProxyNetworkProvider(PROXY_URL)

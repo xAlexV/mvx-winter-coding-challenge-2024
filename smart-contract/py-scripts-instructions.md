@@ -83,7 +83,7 @@ python issue_token_script.py
 - address that called the contract, should have a transaction hash and once contract is finished, and esdt with ticker SNOW and the amount set in token supply constant will be created and sent to caller
 
 # Upgrade the contract
-- we're going to use the script update_snow_token_contract.py
+- we're going to use the script upgrade_sc.py
 - change constants if needed
 ```
 SC_OWNER_WALLET_PATH = "../3-dec/funding_wallet.json" # replace with your wallet file
@@ -96,7 +96,7 @@ SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqmm40w8anjxdr9mrtcag0a4ydhg4a9ukfq7vqrfujc7"  #
 ```
 - run
 ```shell
-python update_snow_token_contract.py
+python upgrade_sc.py
 ```
 - output can be viewed in sc_deploy.log
 - contract address should be visibile in the log file. save it as it will be used later.

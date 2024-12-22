@@ -8,12 +8,13 @@ from utilities import Utilities
 LOG_FILE = "sc_update.log"
 # Configuration for the blockchain connection
 SC_OWNER_WALLET_PATH = "../3-dec/funding_wallet.json"
-WASM_PATH = "./issue-token-snow-sc/output/issue-token-snow-sc.wasm"
-ABI_PATH = "./issue-token-snow-sc/output/issue-token-snow-sc.abi.json"
+WASM_PATH = "./winter-staking-sc/output/winter-staking-sc.wasm"
+ABI_PATH = "./winter-staking-sc/output/winter-staking-sc.abi.json"
 API_URL = "https://devnet-api.multiversx.com"
 PROXY_URL = "https://devnet-gateway.multiversx.com"
 CHAIN_ID = "D"
-SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqmm40w8anjxdr9mrtcag0a4ydhg4a9ukfq7vqrfujc7"  # Update with the deployed contract address
+SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqhv6p5lk6fllusxuaq6fqgrj638gpfznsq7vqg7hj4t"  # Update with the deployed contract address
+# SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqmm40w8anjxdr9mrtcag0a4ydhg4a9ukfq7vqrfujc7"  # Update with the deployed contract address
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s", handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler()])
 proxy = ProxyNetworkProvider(PROXY_URL)

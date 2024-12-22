@@ -2,7 +2,7 @@
 
 ## Overview
 
-The WinterStaking smart contract provides functionality to allow users to stake their `WINTER` tokens. It maintains records of staked tokens and tracks the epoch when tokens were first staked by each user. The contract is designed to be simple, with support for staking, querying balances, and future expandability for features like rewards or unstaking mechanisms.
+The WinterStaking smart contract allows users to stake their `WINTER` tokens, claim rewards periodically, and track their staking history. The contract supports functionalities like staking, rewards claiming, and minting reward tokens with the `SNOW` ticker.
 
 ---
 
@@ -24,6 +24,13 @@ The WinterStaking smart contract provides functionality to allow users to stake 
     - `TokenIdentifier`: The identifier of the token staked.
     - `BigUint`: The amount of the token staked.
 
+#### **`reward_event`**
+- **Description**: Triggered when a user successfully claims rewards.
+- **Parameters**:
+  - **`user`**: The address of the user claiming the rewards.
+  - **`token_identifier`**: The identifier of the reward token.
+  - **`reward_amount`**: The amount of reward tokens minted and distributed.
+
 ---
 
 ### 3. Staking Tokens
@@ -40,31 +47,55 @@ The WinterStaking smart contract provides functionality to allow users to stake 
 
 ---
 
-### 4. Upgradability
+### 4. Claiming Rewards
+#### **Function**: `claim_rewards`
+- **Endpoint**: `@claim_rewards`
+- **Description**: Allows users to claim rewards based on their staked tokens.
+
+- **Details**:
+  - Rewards are calculated as 1% of the staked amount.
+  - Users can claim rewards once every 24 hours.
+  - Minted rewards have the `SNOW` ticker and 8 decimals.
+  - Emits a `reward_event` upon successful claim.
+
+---
+
+### 5. Upgradability
 - **Function**: `upgrade()`
   - Allows the contract owner to upgrade the smart contract.
   - Validates that only the owner can execute the upgrade.
 
 ---
 
-### 5. Storage
-#### **Stakes**
+## Storage Mappers
+
+### **Stakes**
 - **Mapper**: `stakes`
 - **Type**: `MapMapper<(ManagedAddress, TokenIdentifier), BigUint>`
 - **Purpose**: Tracks the staked amount of each token for every user.
 
-#### **Stake Start Epoch**
+### **Stake Start Epoch**
 - **Mapper**: `stake_start_epoch`
 - **Type**: `SingleValueMapper<u64>`
 - **Purpose**: Stores the epoch when each user first staked tokens.
 
+### **Last Reward Claim**
+- **Mapper**: `last_reward_claim`
+- **Type**: `SingleValueMapper<u64>`
+- **Purpose**: Tracks the timestamp of the last reward claim for each user.
+
 ---
 
-## Workflow for Staking
+## Workflow for Staking and Rewards
 
 ### 1. Staking Tokens:
    - Users call the `stake_token_winter` endpoint with their `WINTER` tokens.
    - The contract validates the tokens, updates balances, and emits a `stake_event`.
+
+### 2. Claiming Rewards:
+   - Users call the `claim_rewards` endpoint.
+   - Rewards are calculated as 1% of staked tokens.
+   - Minted rewards are transferred to the user, and the `last_reward_claim` timestamp is updated.
 
 ---
 
@@ -73,12 +104,13 @@ The WinterStaking smart contract provides functionality to allow users to stake 
 ### 1. Token Validation:
 - Only tokens with the prefix `WINTER-` are accepted. This ensures that unrelated tokens cannot be staked.
 
-### 2. Epoch Tracking:
-- The contract records the first epoch during which a user staked tokens. This allows future features, such as rewards or lock-up periods, to use this information.
+### 2. Rewards System:
+- Rewards are minted as `SNOW` tokens with 8 decimals.
+- A 24-hour lock period prevents users from claiming rewards too frequently.
 
 ### 3. Expandability:
 - Future updates can add features like:
-  - Reward distribution based on staked amounts and duration.
+  - Enhanced reward distribution logic.
   - Unstaking mechanisms for users to retrieve their tokens.
   - Penalty or bonus logic for early/late unstaking.
 
@@ -94,8 +126,13 @@ The WinterStaking smart contract provides functionality to allow users to stake 
   - Records the current epoch in the `stake_start_epoch` storage (if not already set).
   - Emits a `stake_event`.
 
-### 2. Querying Staked Balances
-- Developers can query the `stakes` storage to retrieve the staked amounts for a specific user and token.
+### 2. Claiming Rewards
+- A user calls the `claim_rewards` endpoint.
+- The contract:
+  - Calculates rewards as 1% of the staked tokens.
+  - Mints `SNOW` tokens and transfers them to the user.
+  - Updates the `last_reward_claim` timestamp.
+  - Emits a `reward_event`.
 
 ---
 
@@ -111,6 +148,13 @@ The WinterStaking smart contract provides functionality to allow users to stake 
     - `TokenIdentifier`: The identifier of the staked token.
     - `BigUint`: The amount of tokens staked.
 
+#### **`reward_event`**
+- **Description**: Triggered when a user claims rewards.
+- **Parameters**:
+  - `user`: The claiming user's address.
+  - `token_identifier`: The identifier of the reward token.
+  - `reward_amount`: The amount of reward tokens distributed.
+
 ---
 
 ### **Mappers**
@@ -122,6 +166,6 @@ The WinterStaking smart contract provides functionality to allow users to stake 
 - **Type**: `SingleValueMapper<u64>`
 - **Purpose**: Tracks the epoch of the first stake for each user.
 
----
-
-This contract is a minimal implementation, focusing on staking functionality. Future challenges and updates will expand its capabilities.
+#### **`last_reward_claim`**
+- **Type**: `SingleValueMapper<u64>`
+- **Purpose**: Tracks the timestamp of the last reward claim for each user.

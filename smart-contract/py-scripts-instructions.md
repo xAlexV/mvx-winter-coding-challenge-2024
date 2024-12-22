@@ -200,3 +200,16 @@ python claim_batch_tokens.py
 2024-12-12 18:48:37,911 - Claim Transaction Results:
 2024-12-12 18:48:37,911 - Address: erd1kgarc3ppdn6y0llrkwly3jjg60qcsqaqm0ka0kmxey9txsp7y8aqj6muc4, Tx Hash: ed2c39f48c7ea3e48c89f061afd25b25cd1a506c21c61832a78eadfd1a17ee2d
 ```
+
+# Add ESDT mint role
+- we're going to use the script enable_esdt_mint_role_to_sc.py
+- change constants if needed
+```
+SC_ADDRESS = "erd1qqqqqqqqqqqqqpgqhv6p5lk6fllusxuaq6fqgrj638gpfznsq7vqg7hj4t" # sc address for which you want to enable esdt mint role
+TOKEN_IDENTIFIER = "SNOW-ab6b96" # token identifier which can be minted
+```
+- run
+```shell
+python enable_esdt_mint_role_to_sc.py
+```
+- output can be viewed in esdt_mint_role.log

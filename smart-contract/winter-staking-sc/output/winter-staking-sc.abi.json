@@ -40,6 +40,15 @@
             ],
             "inputs": [],
             "outputs": []
+        },
+        {
+            "docs": [
+                "Endpoint to claim rewards"
+            ],
+            "name": "claim_rewards",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
         }
     ],
     "events": [
@@ -62,6 +71,28 @@
                 {
                     "name": "stake_data",
                     "type": "tuple<TokenIdentifier,BigUint>"
+                }
+            ]
+        },
+        {
+            "docs": [
+                "Emit an event for rewards"
+            ],
+            "identifier": "reward_event",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "token_identifier",
+                    "type": "TokenIdentifier",
+                    "indexed": true
+                },
+                {
+                    "name": "reward_amount",
+                    "type": "BigUint"
                 }
             ]
         }

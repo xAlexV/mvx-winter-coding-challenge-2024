@@ -19,6 +19,10 @@ pub trait WinterStakingSc {
     #[storage_mapper("stake_start_epoch")]
     fn stake_start_epoch(&self, user: &ManagedAddress) -> SingleValueMapper<u64>;
 
+    /// Storage to track the last reward claim timestamp for each user
+    #[storage_mapper("last_reward_claim")]
+    fn last_reward_claim(&self, user: &ManagedAddress) -> SingleValueMapper<u64>;
+
     /// Endpoint to stake WINTER tokens
     #[payable("*")]
     #[endpoint(stake_token_winter)]
@@ -68,6 +72,9 @@ pub trait WinterStakingSc {
         if self.stake_start_epoch(&caller).is_empty() {
             self.stake_start_epoch(&caller).set(current_epoch);
         }
+
+        // Initialize the last reward claim time
+        self.last_reward_claim(&caller).set_if_empty(self.blockchain().get_block_timestamp());
     }
 
     /// Emit an event for staking
@@ -77,6 +84,62 @@ pub trait WinterStakingSc {
         #[indexed] user: ManagedAddress,
         #[indexed] epoch: u64,
         stake_data: (TokenIdentifier, BigUint),
+    );
+
+    /// Endpoint to claim rewards
+    #[endpoint(claim_rewards)]
+    fn claim_rewards(&self) {
+        let caller = self.blockchain().get_caller();
+        let current_timestamp = self.blockchain().get_block_timestamp();
+        let last_claim = self.last_reward_claim(&caller).get();
+        
+        // Ensure 24 hours have passed since the last claim
+        let one_day_in_seconds = 24 * 60 * 60;
+        require!(
+            current_timestamp >= last_claim + one_day_in_seconds,
+            "Rewards can only be claimed once every 24 hours"
+        );
+
+        let mut total_rewards = BigUint::zero();
+        for ((user_address, token_identifier), staked_amount) in self.stakes().iter() {
+            if user_address == caller {
+                let reward = staked_amount.clone() / 100u64; // 1% of staked tokens
+                total_rewards += reward.clone();
+
+                // Emit reward distribution event
+                self.reward_event(user_address.clone(), token_identifier.clone(), reward.clone());
+            }
+        }
+
+        require!(total_rewards > 0, "No rewards available to claim");
+
+        // Mint reward tokens
+        let reward_token = TokenIdentifier::from("SNOW-ab6b96".as_bytes());
+        self.send().esdt_local_mint(
+            &reward_token,
+            0,
+            &total_rewards,
+        );
+
+        // Transfer rewards to the caller
+        self.send().direct_esdt(
+            &caller,
+            &reward_token,
+            0,
+            &total_rewards,
+        );
+
+        // Update the last reward claim timestamp
+        self.last_reward_claim(&caller).set(current_timestamp);
+    }
+
+    /// Emit an event for rewards
+    #[event("reward_event")]
+    fn reward_event(
+        &self,
+        #[indexed] user: ManagedAddress,
+        #[indexed] token_identifier: TokenIdentifier,
+        reward_amount: BigUint,
     );
 
     /// Function to handle contract upgrades

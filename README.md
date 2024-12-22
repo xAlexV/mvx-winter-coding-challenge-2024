@@ -60,7 +60,7 @@ Includes batch claim functionality.
   - [Smart Contract Description](smart-contract/issue-token-sc-info.md)
 
 #### Scripts:
-- [Deploy Smart Contract](smart-contract/deploy_snow_token_contract.py)
+- [Deploy Smart Contract](smart-contract/deploy_smart_contract.py)
 - [Update Smart Contract](smart-contract/upgrade_sc.py)
 - [Issue Tokens](smart-contract/issue_token_script.py)
 - [Burn Tokens](smart-contract/burn_tokens.py)
@@ -98,7 +98,7 @@ Includes batch claim functionality.
   - [Smart Contract Description](smart-contract/resource-minting-sc-info.md)
 
 #### Scripts:
-- [Deploy Smart Contract](smart-contract/deploy_snow_token_contract.py)
+- [Deploy Smart Contract](smart-contract/deploy_smart_contract.py)
 - [Update Smart Contract](smart-contract/upgrade_sc.py)
 - [Enable ESDT minting role](smart-contract/enable_esdt_mint_role_to_sc.py)
 
@@ -111,7 +111,20 @@ Includes batch claim functionality.
   - [Smart Contract Description](smart-contract/citizen-nft-minting-sc-info.md)
 
 #### Scripts:
-- [Deploy Smart Contract](smart-contract/deploy_snow_token_contract.py)
+- [Deploy Smart Contract](smart-contract/deploy_smart_contract.py)
+- [Update Smart Contract](smart-contract/upgrade_sc.py)
+
+---
+
+### **19 December - ORE Minting Smart Contract**
+- **Description**: Implemented a smart contract where users can burn 20 stone for 1 ore.
+- **Artifacts**:
+  - [Smart Contract Code](smart-contract/ore-minting-sc)
+  - [Smart Contract Description](smart-contract/ore-minting-sc-info.md)
+
+#### Scripts:
+- [Deploy Smart Contract](smart-contract/deploy_smart_contract.py)
+- [Update Smart Contract](smart-contract/upgrade_sc.py)
 
 ---
 

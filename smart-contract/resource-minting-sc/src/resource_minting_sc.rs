@@ -27,6 +27,10 @@ pub trait ResourceMintingSc {
     #[storage_mapper("unclaimed_resources")]
     fn unclaimed_resources(&self, user: &ManagedAddress) -> SingleValueMapper<BigUint<Self::Api>>;
 
+    /// Storage to track the token identifier for resource minting
+    #[storage_mapper("resource_token_identifier")]
+    fn resource_token_identifier(&self, user: &ManagedAddress) -> SingleValueMapper<TokenIdentifier<Self::Api>>;
+
     /// Endpoint to stake WINTER tokens
     #[payable("*")]
     #[endpoint(stake_winter)]
@@ -78,13 +82,13 @@ pub trait ResourceMintingSc {
             "Unclaimed resources must be claimed before minting"
         );
 
-        let resource_rounds = if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref() == b"WOOD" {
+        let resource_rounds = if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref().starts_with(b"WOOD") {
             600
-        } else if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref() == b"FOOD" {
+        } else if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref().starts_with(b"FOOD") {
             1200
-        } else if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref() == b"STONE" {
+        } else if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref().starts_with(b"STONE") {
             1800
-        } else if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref() == b"GOLD" {
+        } else if self.blockchain().get_sc_address().as_managed_buffer().to_boxed_bytes().as_ref().starts_with(b"GOLD") {
             2400
         } else {
             require!(false, "Invalid resource contract identifier");
@@ -111,6 +115,10 @@ pub trait ResourceMintingSc {
 
         require!(total_mintable > 0, "No resources to mint");
 
+        // Save the resource token identifier for minting
+        let resource_token_id = TokenIdentifier::from(self.blockchain().get_sc_address().as_managed_buffer().clone());
+        self.resource_token_identifier(&caller).set(resource_token_id.clone());
+
         // Update unclaimed resources
         self.unclaimed_resources(&caller).set(total_mintable.clone());
 
@@ -123,19 +131,20 @@ pub trait ResourceMintingSc {
     fn claim_resources(&self) {
         let caller = self.blockchain().get_caller();
         let unclaimed = self.unclaimed_resources(&caller).get();
+        let resource_token_id = self.resource_token_identifier(&caller).get();
 
         require!(unclaimed > BigUint::zero(), "No resources to claim");
 
-        let resource_token = TokenIdentifier::from("WOOD".as_bytes()); // Adjust dynamically as needed
         self.send().esdt_local_mint(
-            &resource_token,
+            &resource_token_id,
             0,
             &unclaimed,
         );
-        self.send().direct_esdt(&caller, &resource_token, 0, &unclaimed);
+        self.send().direct_esdt(&caller, &resource_token_id, 0, &unclaimed);
 
-        // Clear unclaimed resources
+        // Clear unclaimed resources and token identifier
         self.unclaimed_resources(&caller).clear();
+        self.resource_token_identifier(&caller).clear();
     }
 
     /// Emit an event for resource minting

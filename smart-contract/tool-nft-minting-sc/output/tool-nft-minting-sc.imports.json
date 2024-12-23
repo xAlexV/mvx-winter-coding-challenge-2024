@@ -1,5 +1,6 @@
 [
   "bigIntAdd",
+  "bigIntCmp",
   "bigIntSetInt64",
   "checkNoPayment",
   "cleanReturnData",
@@ -8,6 +9,7 @@
   "getNumArguments",
   "mBufferAppend",
   "mBufferAppendBytes",
+  "mBufferCopyByteSlice",
   "mBufferFromBigIntUnsigned",
   "mBufferGetByteSlice",
   "mBufferGetLength",

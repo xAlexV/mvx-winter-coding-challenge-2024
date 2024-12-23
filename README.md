@@ -132,8 +132,8 @@ Includes batch claim functionality.
 
 ---
 
-### **21 December - Tool NFT Minting Smart Contract**
-- **Description**: Enables users to mint a "Shield" NFT by consuming `2 ORE` tokens. Users must claim the NFT after 1 hour of submitting a mint request. The contract ensures that resources are burned, and the claim process is securely timed.
+### **21, 23 December - Tool NFT Minting Smart Contract**
+- **Description**: This smart contract enables users to mint tool NFTs, such as "Shield" and "Sword," by consuming specific resource tokens (`ORE` and `GOLD`). Users must claim the NFT after 1 hour of submitting a mint request. The contract ensures that resources are burned and the claim process is securely timed.
 - **Artifacts**:
   - [Smart Contract Code](smart-contract/tool-nft-minting-sc)
   - [Smart Contract Description](smart-contract/tool-nft-minting-sc-info.md)

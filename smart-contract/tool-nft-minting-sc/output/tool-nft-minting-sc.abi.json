@@ -17,7 +17,7 @@
         }
     },
     "docs": [
-        "Smart contract to mint NFTs, including \"Shield\" and other tools."
+        "Smart contract to mint NFTs, including \"Shield\", \"Sword\", and other tools."
     ],
     "name": "ToolNftMintingSc",
     "constructor": {
@@ -55,6 +55,27 @@
             "mutability": "mutable",
             "inputs": [],
             "outputs": []
+        },
+        {
+            "docs": [
+                "Endpoint to request crafting a \"Sword\" NFT"
+            ],
+            "name": "request_mint_sword",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Endpoint to claim a \"Sword\" NFT"
+            ],
+            "name": "claim_sword",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
         }
     ],
     "events": [
@@ -67,6 +88,11 @@
                 {
                     "name": "user",
                     "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "tool",
+                    "type": "bytes",
                     "indexed": true
                 },
                 {
@@ -84,6 +110,11 @@
                 {
                     "name": "user",
                     "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "tool",
+                    "type": "bytes",
                     "indexed": true
                 }
             ]

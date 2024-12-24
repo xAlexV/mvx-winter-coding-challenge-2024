@@ -115,9 +115,60 @@
                 }
             ],
             "outputs": []
+        },
+        {
+            "docs": [
+                "Endpoint to upgrade Soldier with Sword for +1 attack"
+            ],
+            "name": "upgrade_soldier_with_sword",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "soldier_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "soldier_nonce",
+                    "type": "u64"
+                },
+                {
+                    "name": "sword_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "sword_nonce",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
         }
     ],
     "events": [
+        {
+            "docs": [
+                "Emit an event for Soldier upgrade with Sword"
+            ],
+            "identifier": "upgrade_soldier_with_sword_event",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "token_id",
+                    "type": "TokenIdentifier",
+                    "indexed": true
+                },
+                {
+                    "name": "nonce",
+                    "type": "u64"
+                }
+            ]
+        },
         {
             "docs": [
                 "Emit an event for soldier upgrade"

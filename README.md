@@ -104,11 +104,12 @@ Includes batch claim functionality.
 
 ---
 
-### **18, 20, 22 December - Citizen NFT Minting Smart Contract**
+### **18, 20, 22, 24 December - Citizen NFT Minting Smart Contract**
 - **Description**: This smart contract enables users to:
   - Mint a "CITIZEN" NFT by burning required resources (`WOOD` and `FOOD` tokens).
   - Upgrade the "CITIZEN" NFT to a "SOLDIER" NFT by burning `GOLD` and `ORE` tokens.
   - Further enhance a "SOLDIER" NFT by consuming a "SHIELD" NFT to gain `+1 defense` using the MultiversX dynamic NFT (dyNFT) features.
+  - Further enhance a "SOLDIER" NFT by consuming a "SWORD" NFT to gain `+1 attack` using the MultiversX dynamic NFT (dyNFT) features.
 
 - **Artifacts**:
   - [Smart Contract Code](smart-contract/citizen-nft-minting-sc)

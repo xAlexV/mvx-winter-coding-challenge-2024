@@ -5,9 +5,11 @@
 This smart contract enables users to:
 1. Mint a "CITIZEN" NFT by burning required resources (`WOOD` and `FOOD` tokens).
 2. Upgrade the "CITIZEN" NFT to a "SOLDIER" NFT by burning `GOLD` and `ORE` tokens.
-3. Further enhance a "SOLDIER" NFT by consuming a "SHIELD" NFT to gain `+1 defense` using the MultiversX dynamic NFT (dyNFT) features.
+3. Enhance a "SOLDIER" NFT with:
+   - A "SHIELD" NFT to gain `+1 defense`.
+   - A "SWORD" NFT to gain `+1 attack`.
 
-Each process involves validation, token burning, and timed claim mechanisms to ensure secure and transparent operations.
+Each process involves validation, token burning, and dynamic NFT attribute updates (dyNFT) to reflect the changes.
 
 ---
 
@@ -35,6 +37,13 @@ Each process involves validation, token burning, and timed claim mechanisms to e
 
 #### **`upgrade_soldier_event`**
 - **Description**: Triggered when a "SOLDIER" NFT is upgraded with a "SHIELD" NFT.
+- **Parameters**:
+  - **`user`**: The address of the user upgrading the "SOLDIER".
+  - **`token_id`**: The token identifier of the "SOLDIER" NFT.
+  - **`nonce`**: The nonce of the "SOLDIER" NFT being upgraded.
+
+#### **`upgrade_soldier_with_sword_event`**
+- **Description**: Triggered when a "SOLDIER" NFT is upgraded with a "SWORD" NFT.
 - **Parameters**:
   - **`user`**: The address of the user upgrading the "SOLDIER".
   - **`token_id`**: The token identifier of the "SOLDIER" NFT.
@@ -97,7 +106,7 @@ Each process involves validation, token burning, and timed claim mechanisms to e
 
 ---
 
-### 3. Enhancing a "SOLDIER" with a "SHIELD"
+### 3. Enhancing a "SOLDIER" with Tools
 #### **Function**: `upgrade_soldier_with_shield`
 - **Description**: Allows users to upgrade a "SOLDIER" NFT by consuming a "SHIELD" NFT.
 - **Requirements**:
@@ -109,6 +118,18 @@ Each process involves validation, token burning, and timed claim mechanisms to e
   - The "SHIELD" NFT is burned.
   - The "SOLDIER" NFT attributes are updated to include `defense:+1` using the MultiversX `nft_update_attributes` feature.
   - Emits an `upgrade_soldier_event`.
+
+#### **Function**: `upgrade_soldier_with_sword`
+- **Description**: Allows users to upgrade a "SOLDIER" NFT by consuming a "SWORD" NFT.
+- **Requirements**:
+  - Provide the "SOLDIER" NFT token ID and nonce.
+  - Provide the "SWORD" NFT token ID and nonce.
+- **Workflow**:
+  - Users send both NFTs to the contract.
+  - The contract validates the NFTs.
+  - The "SWORD" NFT is burned.
+  - The "SOLDIER" NFT attributes are updated to include `attack:+1` using the MultiversX `nft_update_attributes` feature.
+  - Emits an `upgrade_soldier_with_sword_event`.
 
 ---
 
@@ -150,12 +171,20 @@ Each process involves validation, token burning, and timed claim mechanisms to e
 - After 1 hour, the user calls `claim_soldier` with the "CITIZEN" NFT nonce.
 - The contract updates the NFT attributes to reflect the "SOLDIER" status.
 
-### 3. Enhancing a "SOLDIER" with a "SHIELD"
+### 3. Enhancing a "SOLDIER" with Tools
+#### With a "SHIELD":
 - A user calls `upgrade_soldier_with_shield` with:
   - The "SOLDIER" NFT token ID and nonce.
   - The "SHIELD" NFT token ID and nonce.
 - The contract validates the NFTs and burns the "SHIELD".
 - The "SOLDIER" NFT attributes are updated to include `defense:+1`.
+
+#### With a "SWORD":
+- A user calls `upgrade_soldier_with_sword` with:
+  - The "SOLDIER" NFT token ID and nonce.
+  - The "SWORD" NFT token ID and nonce.
+- The contract validates the NFTs and burns the "SWORD".
+- The "SOLDIER" NFT attributes are updated to include `attack:+1`.
 
 ---
 

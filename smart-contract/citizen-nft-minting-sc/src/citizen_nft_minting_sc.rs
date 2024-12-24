@@ -217,6 +217,63 @@ pub trait CitizenNftMintingSc {
         self.upgrade_soldier_event(caller, citizen_token_id, citizen_nonce);
     }
 
+    /// Endpoint to upgrade Soldier with Sword for +1 attack
+    #[payable("*")]
+    #[endpoint(upgrade_soldier_with_sword)]
+    fn upgrade_soldier_with_sword(
+        &self,
+        soldier_token_id: TokenIdentifier,
+        soldier_nonce: u64,
+        sword_token_id: TokenIdentifier,
+        sword_nonce: u64,
+    ) {
+        let caller = self.blockchain().get_caller();
+
+        // Ensure two NFTs are provided
+        require!(
+            self.call_value().all_esdt_transfers().len() == 2,
+            "Two NFTs (Soldier and Sword) must be provided"
+        );
+
+        let mut soldier_found = false;
+        let mut sword_found = false;
+
+        // Validate the Soldier and Sword NFTs
+        for payment in self.call_value().all_esdt_transfers().iter() {
+            if payment.token_identifier == soldier_token_id && payment.token_nonce == soldier_nonce {
+                soldier_found = true;
+            } else if payment.token_identifier == sword_token_id && payment.token_nonce == sword_nonce {
+                sword_found = true;
+            } else {
+                require!(false, "Invalid tokens provided");
+            }
+        }
+
+        require!(soldier_found, "Soldier NFT not found");
+        require!(sword_found, "Sword NFT not found");
+
+        // Consume the Sword NFT by burning it
+        self.send()
+            .esdt_local_burn(&sword_token_id, sword_nonce, &BigUint::from(1u64));
+
+        // Update the Soldier NFT attributes
+        let new_attributes = ManagedBuffer::new_from_bytes(b"attack:+1");
+        self.send()
+            .nft_update_attributes(&soldier_token_id, soldier_nonce, &new_attributes);
+
+        // Emit an event for the upgrade
+        self.upgrade_soldier_with_sword_event(caller, soldier_token_id, soldier_nonce);
+    }
+
+    /// Emit an event for Soldier upgrade with Sword
+    #[event("upgrade_soldier_with_sword_event")]
+    fn upgrade_soldier_with_sword_event(
+        &self,
+        #[indexed] user: ManagedAddress,
+        #[indexed] token_id: TokenIdentifier,
+        nonce: u64,
+    );
+
     /// Emit an event for soldier upgrade
     #[event("upgrade_soldier_event")]
     fn upgrade_soldier_event(

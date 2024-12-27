@@ -21,4 +21,6 @@ smart-contract/ore-minting-sc/target/.rustc_info.json
 smart-contract/ore-minting-sc/target/*
 smart-contract/tool-nft-minting-sc/target/.rustc_info.json
 smart-contract/tool-nft-minting-sc/target/*
+smart-contract/arena-sc/target/.rustc_info.json
+smart-contract/arena-sc/target/*
 *.log

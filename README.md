@@ -145,4 +145,17 @@ Includes batch claim functionality.
 
 ---
 
+### **25 December - Tool NFT Minting Smart Contract**
+- **Description**: The Arena Smart Contract is a blockchain-based gaming contract designed for a competitive arena where users can bring their Soldier NFTs to battle. Participants can create or join games, bet tokens, and fight using their soldiers. The winner takes the deposited tokens and retains their soldier NFT, while the loser forfeits their deposit.
+
+- **Artifacts**:
+  - [Smart Contract Code](smart-contract/arena-sc)
+  - [Smart Contract Description](smart-contract/arena-sc-info.md)
+
+#### Scripts:
+- [Deploy Smart Contract](smart-contract/deploy_smart_contract.py)
+- [Update Smart Contract](smart-contract/upgrade_sc.py)
+
+---
+
 Each challenge folder includes detailed instructions and scripts for reproducing the results. See the linked `.md` files for more information.

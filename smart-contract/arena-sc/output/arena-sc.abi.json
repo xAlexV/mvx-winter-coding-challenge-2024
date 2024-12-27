@@ -1,0 +1,92 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.83.0",
+            "commitHash": "90b35a6239c3d8bdabc530a6a0816f7ff89a0aaf",
+            "commitDate": "2024-11-26",
+            "channel": "Stable",
+            "short": "rustc 1.83.0 (90b35a623 2024-11-26)"
+        },
+        "contractCrate": {
+            "name": "arena-sc",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.54.6"
+        }
+    },
+    "name": "ArenaSc",
+    "constructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "upgradeConstructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "createGame",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [
+                {
+                    "name": "game_id",
+                    "type": "bytes"
+                },
+                {
+                    "name": "soldier_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "soldier_nonce",
+                    "type": "u64"
+                },
+                {
+                    "name": "entrance_fee",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "joinGame",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [
+                {
+                    "name": "game_id",
+                    "type": "bytes"
+                },
+                {
+                    "name": "soldier_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "soldier_nonce",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "startFight",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "game_id",
+                    "type": "bytes"
+                }
+            ],
+            "outputs": []
+        }
+    ],
+    "esdtAttributes": [],
+    "hasCallback": false,
+    "types": {}
+}

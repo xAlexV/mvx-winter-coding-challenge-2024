@@ -145,7 +145,7 @@ Includes batch claim functionality.
 
 ---
 
-### **25 December - Tool NFT Minting Smart Contract**
+### **25 December - Arena Smart Contract**
 - **Description**: The Arena Smart Contract is a blockchain-based gaming contract designed for a competitive arena where users can bring their Soldier NFTs to battle. Participants can create or join games, bet tokens, and fight using their soldiers. The winner takes the deposited tokens and retains their soldier NFT, while the loser forfeits their deposit.
 
 - **Artifacts**:
